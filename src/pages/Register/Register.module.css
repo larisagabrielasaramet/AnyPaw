@@ -1,0 +1,107 @@
+.form_container {
+  max-width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.form_group {
+  margin-bottom: 15px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  text-align: left;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; /* So that the width includes padding */
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #008080; /* Dark Turquoise */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: #006666; /* A slightly darker Turquoise */
+}
+
+.register_link {
+  margin-top: 20px;
+}
+
+/* Styling for the Link component if needed */
+.register_link a {
+  color: #008080;
+  text-decoration: none;
+}
+
+.register_link a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  display: "flex";
+  flex: 1;
+  justify-content: "center";
+  align-items: "center";
+  flex-direction: column;
+  background-color: #f7f7f7;
+}
+
+.radio_button {
+  display: "flex";
+  flex-direction: "row";
+  align-items: "center";
+}
+.radio_label {
+  margin-left: "8px";
+  font-size: "17px";
+  color: "#333";
+}
+
+.flex-direction {
+  flex-direction: row;
+  align-items: center;
+}
+
+.radio_label {
+  margin-left: 8px;
+  font-size: 17px;
+  color: #333;
+}
+
+.input_icon_wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.input_icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.error_message {
+  color: red;
+  margin-top: 5px; /* Add some space above the message */
+}

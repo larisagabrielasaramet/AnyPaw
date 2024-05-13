@@ -1,0 +1,17 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa; /* Change this to your preferred color */
+  height: 60px; /* Change this to adjust the height of the navbar */
+  border-radius: 10px; /* Rounded corners */
+  margin: 20px auto; /* Top and bottom margin is 20px, left and right margin is auto */
+  width: 90%; /* The navbar is 90% the width of its parent */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a slight shadow for a 3D effect */
+}
+
+.navbar a {
+  color: #333; /* Change this to your preferred color */
+  text-decoration: none;
+  margin: 0 15px; /* Each link has a margin of 15px to the left and right */
+}
