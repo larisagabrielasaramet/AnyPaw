@@ -20,12 +20,16 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [fullNameError, setFullNameError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [phoneError, setPhoneError] = useState("");
-  const [addressError, setAddressError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const [isFullNameEmpty, setIsFullNameEmpty] = useState(false);
+  const [isEmailEmpty, setIsEmailEmpty] = useState(false);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
+  const [isPhoneEmpty, setIsPhoneEmpty] = useState(false);
+  const [isAddressEmpty, setIsAddressEmpty] = useState(false);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -56,17 +60,17 @@ const Register = () => {
   };
 
   const handleRegister = async (e) => {
-    // Reset the error messages at the beginning of the function
-    setFullNameError("");
     setEmailError("");
     setPasswordError("");
     setConfirmPasswordError("");
     setPhoneError("");
-    setAddressError("");
 
-    // Check if all fields are filled
+    setIsFullNameEmpty(!fullName);
+    setIsEmailEmpty(!email);
+    setIsPasswordEmpty(!password);
+    setIsPhoneEmpty(!phone);
+    setIsAddressEmpty(!address);
 
-    // If any field is empty, stop the function
     if (
       !fullName ||
       !email ||
@@ -75,12 +79,11 @@ const Register = () => {
       !phone ||
       !address
     ) {
-      setErrorMessage("All fields are mandatory");
+      setErrorMessage("All fields are required");
       return;
     }
 
     try {
-      // Create a new user with email and password
       const userCredential = await createUserWithEmailAndPassword(
         FIREBASE_AUTH,
         email,
@@ -88,7 +91,6 @@ const Register = () => {
       );
       const user = userCredential.user;
 
-      // Add a new document to the "user" collection
       await addDoc(collection(db, "user"), {
         uid: user.uid,
         fullName: fullName,
@@ -99,9 +101,7 @@ const Register = () => {
       });
       navigate("/signin");
     } catch (error) {
-      // Handle any errors here
       if (error.code === "auth/email-already-in-use") {
-        //setEmailError("There already exists an account with this email");
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -119,47 +119,65 @@ const Register = () => {
       <div className={styles.input_field}>
         <label htmlFor="fullname">Full Name</label>
         <input
-          className={styles.input}
+          className={`${styles.input} ${
+            isFullNameEmpty ? styles.empty_error : ""
+          }`}
           type="text"
           id="fullname"
           value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
+          onChange={(e) => {
+            setIsFullNameEmpty(false);
+            setFullName(e.target.value);
+          }}
         />
-        {fullNameError && <p>{fullNameError}</p>}
       </div>
-      {/* {errorMessage && <p>{errorMessage}</p>} */}
+
       <div className={styles.input_field}>
         <label htmlFor="email">Email</label>
         <input
-          className={styles.input}
+          className={`${styles.input} ${
+            isEmailEmpty ? styles.empty_error : ""
+          }`}
           type="email"
           id="email"
           value={email}
-          onChange={handleEmailChange}
+          onChange={(e) => {
+            handleEmailChange(e);
+            setIsEmailEmpty(false);
+          }}
         />
-        {emailError && <p>{emailError}</p>}
+        {emailError && <p className={styles.error_message}>{emailError}</p>}
       </div>
       <div className={styles.input_field}>
         <label htmlFor="phone">Phone</label>
         <input
-          className={styles.input}
+          className={`${styles.input} ${
+            isPhoneEmpty ? styles.empty_error : ""
+          }`}
           type="tel"
           id="phone"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(e) => {
+            setPhone(e.target.value);
+            setIsPhoneEmpty(false);
+          }}
         />
-        {phoneError && <p>{phoneError}</p>}
+        {phoneError && <p className={styles.error_message}>{phoneError}</p>}
       </div>
       <div className={styles.input_field}>
         <label htmlFor="address">Address</label>
         <input
-          className={styles.input}
+          className={`${styles.input} ${
+            isAddressEmpty ? styles.empty_error : ""
+          }`}
           type="text"
           id="address"
           value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          onChange={(e) => {
+            setAddress(e.target.value);
+            setIsAddressEmpty(false);
+          }}
         />
-        {addressError && <p>{addressError}</p>}
       </div>
       <div className={styles.input_field}>
         <div>
@@ -167,11 +185,16 @@ const Register = () => {
         </div>
         <div className={styles.input_icon_wrapper}>
           <input
-            className={styles.input}
+            className={`${styles.input} ${
+              isPasswordEmpty ? styles.empty_error : ""
+            }`}
             type={showPassword ? "text" : "password"}
             id="password"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={(e) => {
+              handlePasswordChange(e);
+              setIsPasswordEmpty(false);
+            }}
           />
           <br />
           {showPassword ? (
@@ -186,7 +209,9 @@ const Register = () => {
             />
           )}
         </div>
-        {passwordError && <p>{passwordError}</p>}
+        {passwordError && (
+          <p className={styles.error_message}>{passwordError}</p>
+        )}
       </div>
       <div className={styles.input_field}>
         <label htmlFor="confirmPassword">Confirm Password</label>
@@ -210,10 +235,12 @@ const Register = () => {
             />
           )}
         </div>
-        {confirmPasswordError && <p>{confirmPasswordError}</p>}
+        {confirmPasswordError && (
+          <p className={styles.error_message}>{confirmPasswordError}</p>
+        )}
       </div>
       <br />
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && <p className={styles.error_message}>{errorMessage}</p>}
       <button className={styles.btn} onClick={handleRegister}>
         Register
       </button>

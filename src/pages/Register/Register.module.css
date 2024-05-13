@@ -24,13 +24,12 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  box-sizing: border-box; /* So that the width includes padding */
+  box-sizing: border-box;
 }
-
 .btn {
   width: 100%;
   padding: 10px;
-  background-color: #008080; /* Dark Turquoise */
+  background-color: #008080;
   color: white;
   border: none;
   border-radius: 4px;
@@ -39,14 +38,13 @@
 }
 
 .btn:hover {
-  background-color: #006666; /* A slightly darker Turquoise */
+  background-color: #006666;
 }
 
 .register_link {
   margin-top: 20px;
 }
 
-/* Styling for the Link component if needed */
 .register_link a {
   color: #008080;
   text-decoration: none;
@@ -103,5 +101,9 @@
 
 .error_message {
   color: red;
-  margin-top: 5px; /* Add some space above the message */
+  margin-top: 5px;
+}
+
+.empty_error {
+  border-color: red;
 }
