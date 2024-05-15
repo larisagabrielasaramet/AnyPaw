@@ -4,7 +4,7 @@ import { FIREBASE_AUTH } from "../../firebase/firebase";
 import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
 import Swal from "sweetalert2";
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import { FiEye, FiEyeOff, FiMail, FiLock } from "react-icons/fi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -30,32 +30,36 @@ const Login = () => {
     <div className={styles.form_container}>
       <h2 className={styles.form_title}>Sign in</h2>
       <div className={styles.form_group}>
-        <label htmlFor="email"></label>
-        <input
-          className={styles.input}
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <div className={styles.input_icon_wrapper}>
+          <FiMail className={styles.input_icon_left} />
+          <input
+            className={styles.input}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="email"
+          />
+        </div>
       </div>
       <div className={styles.input_field}>
-        <label htmlFor="password"></label>
         <div className={styles.input_icon_wrapper}>
+          <FiLock className={styles.input_icon_left} />
           <input
             className={styles.input}
             type={showPassword ? "text" : "password"}
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="password"
           />
           {showPassword ? (
             <FiEye
-              className={styles.input_icon}
+              className={styles.input_icon_right}
               onClick={() => setShowPassword(false)}
             />
           ) : (
             <FiEyeOff
-              className={styles.input_icon}
+              className={styles.input_icon_right}
               onClick={() => setShowPassword(true)}
             />
           )}

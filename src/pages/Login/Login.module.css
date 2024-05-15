@@ -1,3 +1,12 @@
+.form_title {
+  font-size: 2em; /* Make the font larger */
+  font-family: "Arial", sans-serif; /* Change the font */
+  color: #006666; /* Change the color */
+  text-align: center; /* Center the text */
+  margin-bottom: 20px; /* Add some space below the title */
+  text-transform: bold; /* Make the text uppercase */
+  letter-spacing: 1px; /* Increase spacing between letters */
+}
 .form_container {
   max-width: 300px;
   margin: 200px auto;
@@ -9,20 +18,21 @@
 }
 
 .form_group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .label {
   display: block;
-  margin-bottom: 5px;
-  color: #333;
+  margin-bottom: 10px;
+  color: #006666;
   text-align: left;
 }
 
 .input {
   width: 90%;
   padding: 10px;
-  padding-left: 30px;
+  padding-right: 40px;
+  padding-left: 40px;
   border: 1px solid #006666;
   border-radius: 24px;
   box-sizing: border-box;
@@ -93,12 +103,22 @@
   width: 100%;
 }
 
-.input_icon {
+.input_icon_left {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.input_icon_right {
   position: absolute;
   right: 40px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+  width: 15px;
+  height: 15px;
 }
 
 .error_message {
