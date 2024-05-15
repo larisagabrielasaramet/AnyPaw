@@ -23,14 +23,14 @@ const Home = () => {
         <p>Sat/Sun: CLOSED</p>
         <button
           className={styles.button}
-          onClick={() => alert("Make an appointment")}
+          onClick={() => (window.location.href = "/signin")}
         >
           Make an appointment
         </button>
       </div>
       <div className={styles.contact}>
         <h2>Contact Us</h2>
-        <p className={styles}>Phone: +40.75388396 - Email: anypaw@vet.ro</p>
+        <p className={styles}>Phone: +4075388396 - Email: anypaw@vet.ro</p>
       </div>
       <div className={styles.footer}>
         <a
