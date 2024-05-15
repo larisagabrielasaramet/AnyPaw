@@ -17,19 +17,20 @@ const Login = () => {
       await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
       alert("Login successful!");
     } catch (error) {
-      // Use Swal.fire to display the error message
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Login failed!",
+        confirmButtonColor: "#008080",
       });
     }
   };
 
   return (
     <div className={styles.form_container}>
+      <h2 className={styles.form_title}>Sign in</h2>
       <div className={styles.form_group}>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email"></label>
         <input
           className={styles.input}
           type="email"
@@ -38,7 +39,7 @@ const Login = () => {
         />
       </div>
       <div className={styles.input_field}>
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password"></label>
         <div className={styles.input_icon_wrapper}>
           <input
             className={styles.input}

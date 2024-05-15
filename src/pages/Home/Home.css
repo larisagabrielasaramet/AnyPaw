@@ -8,6 +8,7 @@
   background-size: 80%;
   background-repeat: no-repeat;
   background-position: right;
+  overflow: auto;
 }
 
 .content {
@@ -37,7 +38,7 @@ button {
 }
 
 button:hover {
-  background-color: #008080;
+  background-color: #006666;
 }
 
 .footer {
@@ -73,9 +74,9 @@ button:hover {
 }
 
 .schedule {
-  margin-top: 50px; /* Increase the top margin to push the box down */
-  margin-right: 20px;
-  margin-bottom: 20px;
+  margin-top: 200px; /* Increase the top margin to push the box down */
+  margin-right: 10px;
+  margin-bottom: 10px;
   margin-left: 20px;
   padding: 20px;
   border: 2px solid #008080;

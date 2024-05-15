@@ -34,7 +34,7 @@ const Register = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
     if (e.target.value.length < 8) {
-      setPasswordError("Password must be at least 8 characters long");
+      setPasswordError("*Password must be at least 8 characters long*");
     } else {
       setPasswordError("");
     }
@@ -43,7 +43,7 @@ const Register = () => {
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     if (e.target.value !== password) {
-      setConfirmPasswordError("Passwords do not match");
+      setConfirmPasswordError("*Passwords do not match*");
     } else {
       setConfirmPasswordError("");
     }
@@ -53,7 +53,7 @@ const Register = () => {
     setEmail(e.target.value);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(e.target.value)) {
-      setEmailError("Please enter a valid email");
+      setEmailError("*Please enter a valid email*");
     } else {
       setEmailError("");
     }
@@ -79,7 +79,7 @@ const Register = () => {
       !phone ||
       !address
     ) {
-      setErrorMessage("All fields are required");
+      setErrorMessage("*All fields are required*");
       return;
     }
 
