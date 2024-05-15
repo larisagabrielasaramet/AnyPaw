@@ -1,14 +1,14 @@
 import React from "react";
-import logo from "../Assets/logo.png";
+import logo from "./logo.png";
 function Logo() {
   return (
-    <div>
+    <div style={{ position: "absolute", top: 0, left: 50 }}>
       <img
         src={logo}
         alt="Logo"
         style={{
-          width: "150px",
-          height: "150px",
+          width: "auto",
+          height: "60px",
           backgroundColor: "transparent",
         }}
       />

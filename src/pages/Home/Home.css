@@ -1,18 +1,88 @@
 .container {
-    background-image: url('/public/hp-background.png');
-    width: 100%;
-    height: 100vh; 
-    background-size: cover; 
-    background-position: center; 
-    padding: 0; 
-    overflow: hidden;
-  }
-  
-  .content {
-    position: absolute;
-    top: 50%; 
-    left: 20px; 
-    transform: translateY(-50%); 
-    color: rgb(0, 0, 0); 
-    font-size: 24px;
-  }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background-image: url("/public/hp-background.png");
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.content p {
+  font-size: 1.5em;
+  color: white;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1em;
+  color: white;
+  background: #5f9ea0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #008080;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.footer .facebook-icon {
+  background-image: url("/public/facebook-icon.png");
+}
+
+.footer .twitter-icon {
+  background-image: url("/public/twitter-icon.png");
+}
+
+.footer .instagram-icon {
+  background-image: url("/public/instagram-icon.png");
+}
+
+.footer a {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0 10px;
+}
+
+.schedule {
+  margin-top: 50px; /* Increase the top margin to push the box down */
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  padding: 20px;
+  border: 2px solid #008080;
+  border-radius: 5px;
+  background-color: white;
+  color: #008080;
+  max-width: 200px;
+  max-height: 300px;
+  overflow: auto;
+}

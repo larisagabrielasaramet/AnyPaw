@@ -4,16 +4,23 @@ import styled from "styled-components";
 
 export const Nav = styled.nav`
   background: #008080; /* Dark Turquoise */
-  height: 85px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   padding: 0.2rem calc((100vw - 1000px) / 2);
   z-index: 12;
+  width: 30%;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px 10px 10px 10px; /* Round the bottom corners */
 `;
 
 export const NavLink = styled(Link)`
-  color: #ffffff; /* Alb */
+  color: white; /* Alb */
   display: flex;
+  margin-right: 5px;
   align-items: center;
   text-decoration: none;
   padding: 0 1rem;
@@ -26,9 +33,9 @@ export const NavLink = styled(Link)`
 
 export const Bars = styled(FaBars)`
   display: none;
-  color: #ffffff; /* Alb */
+  color: black; /* Alb */
   @media screen and (max-width: 768px) {
-    display: block;
+    display: white;
     position: absolute;
     top: 0;
     right: 0;
@@ -41,40 +48,41 @@ export const Bars = styled(FaBars)`
 export const NavMenu = styled.div`
   display: flex;
   align-items: center;
-  margin-right: -24px;
+  content: "";
+  margin-right: 110px;
   @media screen and (max-width: 768px) {
     display: none;
   }
 `;
 
 export const NavBtn = styled.nav`
+  background: #008080; /* Dark Turquoise */
   display: flex;
   align-items: center;
-  margin-right: 24px;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
+  margin-left: auto;
 `;
 
 export const NavBtnLink = styled(Link)`
-  border-radius: 4px;
-  background: #ffffff; /* White */
-  padding: 10px 22px;
-  color: #008080; /* Dark Turquoise */
+  align-items: center;
+  border-radius: 24px;
+  background: #5F9EA0; 
+  padding: 10px 20px;
+  color: white; 
   outline: none;
   border: none;
   cursor: pointer;
+  height: 25px;
+  width: 50px;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  margin-left: 24px;
+  margin-left: 75px;
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: #fff;
-    color: #ffffff; /* Alb */
-  }
+    background: #5F9EA0; 
+    color: #add8e6; 
 `;
 
 export const LogoContainer = styled.div`
   display: flex;
-  align-items: center;
+  margin-right: auto;
 `;

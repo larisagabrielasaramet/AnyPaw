@@ -35,9 +35,6 @@ const Navbar = () => {
           <NavLink to="/adoption" activeStyle>
             Adoption
           </NavLink>
-
-          {/* Second Nav */}
-          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn>
           <NavBtnLink to="/signin">Sign in</NavBtnLink>
