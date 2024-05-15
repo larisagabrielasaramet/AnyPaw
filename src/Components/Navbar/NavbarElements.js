@@ -4,7 +4,9 @@ import styled from "styled-components";
 
 export const Nav = styled.nav`
   margin-top: 10px;
+
   background: #008080; /* Dark Turquoise */
+
   height: 60px;
   display: flex;
   justify-content: space-between;

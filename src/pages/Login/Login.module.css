@@ -1,6 +1,7 @@
 .form_title {
   font-size: 2em; /* Make the font larger */
-  font-family: "Arial", sans-serif; /* Change the font */
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: #006666; /* Change the color */
   text-align: center; /* Center the text */
   margin-bottom: 20px; /* Add some space below the title */

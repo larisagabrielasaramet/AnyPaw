@@ -1,3 +1,13 @@
+.form_title {
+  font-size: 2em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: #006666;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: bold;
+  letter-spacing: 1px;
+}
 .form_container {
   max-width: 300px;
   margin: 150px auto;
@@ -9,23 +19,27 @@
 }
 
 .form_group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .label {
   display: block;
   margin-bottom: 5px;
-  color: #008080;
+  color: #006666;
   text-align: left;
 }
 
 .input {
+  margin-top: 10px;
   width: 90%;
   padding: 10px;
-  border: 1px solid #ddd;
+  padding-right: 30px;
+  padding-left: 40px;
+  border: 1px solid #006666;
   border-radius: 24px;
   box-sizing: border-box;
 }
+
 .btn {
   width: 50%;
   padding: 10px;
@@ -34,7 +48,7 @@
   border: none;
   border-radius: 24px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .btn:hover {
@@ -82,7 +96,7 @@
 .radio_label {
   margin-left: 8px;
   font-size: 17px;
-  color: #333;
+  color: #006666;
 }
 
 .input_icon_wrapper {
@@ -91,12 +105,25 @@
   width: 100%;
 }
 
-.input_icon {
+.input_icon_left {
   position: absolute;
+  margin-top: 5px;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+}
+
+.input_icon_right {
+  position: absolute;
+  margin-top: 5px;
   right: 40px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+  width: 15px;
+  height: 15px;
 }
 
 .error_message {

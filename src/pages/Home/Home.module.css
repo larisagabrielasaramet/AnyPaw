@@ -27,12 +27,12 @@
 button {
   margin: 10px;
   padding: 10px 20px;
-  border-radius: 30px;
+  border-radius: 24px;
   font-size: 1em;
   color: white;
   background: #5f9ea0;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -52,15 +52,15 @@ button:hover {
   background-color: transparent;
 }
 
-.footer .facebook-icon {
+.footer .facebook_icon {
   background-image: url("/public/facebook-icon.png");
 }
 
-.footer .twitter-icon {
+.footer .twitter_icon {
   background-image: url("/public/twitter-icon.png");
 }
 
-.footer .instagram-icon {
+.footer .instagram_icon {
   background-image: url("/public/instagram-icon.png");
 }
 
@@ -74,16 +74,68 @@ button:hover {
 }
 
 .schedule {
-  margin-top: 200px; /* Increase the top margin to push the box down */
+  margin-top: 30px; /* Increase the top margin to push the box down */
   margin-right: 10px;
-  margin-bottom: 10px;
-  margin-left: 20px;
+  margin-bottom: 20x;
+  margin-left: 150px;
   padding: 20px;
   border: 2px solid #008080;
   border-radius: 5px;
   background-color: white;
   color: #008080;
-  max-width: 200px;
-  max-height: 300px;
+  max-width: 300px;
+  max-height: 200px;
   overflow: auto;
+  text-align: center;
+  background-image: url("/public/schedule-icon.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 50px 50px;
+  background-position: 5dvh 3cap;
+}
+
+.title {
+  font-size: 3.5em;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-left: 200px;
+  color: #008080;
+  text-shadow: 2px 2px 4px #006666;
+}
+
+.subtitle {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 2em;
+  text-align: initial;
+  color: #006666;
+  padding-left: 10px;
+  margin: 0px 100px;
+  margin-top: -40px;
+}
+
+.contact {
+  margin-top: 20px;
+  margin-right: 50px;
+  text-align: right;
+  color: #008080;
+  text-transform: bold;
+  font-weight: 200;
+}
+
+.title span {
+  margin: 5px 5px;
+  margin-top: 120px;
+  display: inline-block;
+  animation: move 0.5s ease forwards;
+  padding: 0;
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
