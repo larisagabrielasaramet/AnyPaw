@@ -13,44 +13,48 @@ const Home = () => {
   ));
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>{letters}</h2>
-      <p className={styles.subtitle}>
-        Where compassion meets care: Your trusted partner in pet health!
-      </p>
-      <div className={styles.schedule}>
-        <h2>SCHEDULE</h2>
-        <p>Mon-Fri: 9AM-7PM</p>
-        <p>Sat/Sun: CLOSED</p>
+      <div className={styles.paragraph}>
+        <h2 className={styles.title}>{letters}</h2>
+        <p className={styles.subtitle}>
+          Where compassion meets care: Your trusted partner in pet health!
+        </p>
+      </div>
+      <div className={styles.services_buttons}>
         <button
-          className={styles.button}
+          className={styles.custom_button}
           onClick={() => (window.location.href = "/signin")}
         >
           Make an appointment
         </button>
-      </div>
-      <div className={styles.contact}>
-        <h2>Contact Us</h2>
-        <p className={styles}>Phone: +4075388396 - Email: anypaw@vet.ro</p>
+        <button class={styles.custom_button}>Join our team</button>
       </div>
       <div className={styles.footer}>
-        <a
-          href="https://www.facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles["facebook_icon"]}
-        ></a>
-        <a
-          href="https://www.twitter.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles["twitter_icon"]}
-        ></a>
-        <a
-          href="https://www.instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles["instagram_icon"]}
-        ></a>
+        <p>
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles["facebook_icon"]}
+          >
+            Facebook
+          </a>
+          <a
+            href="https://www.twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles["twitter_icon"]}
+          >
+            Twitter
+          </a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles["instagram_icon"]}
+          >
+            Instagram
+          </a>
+        </p>
       </div>
     </div>
   );

@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 78px;
+  padding: 20px;
+}
+.schedule {
+  background-image: url("/public/cat.png");
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-position: bottom;
+}
+
+.column {
+  flex: 1;
+  padding: 20px;
+  background-color: #5f9ea0;
+  border: 2px solid #008080;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.column h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 2.5em;
+  align-items: center;
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.column p {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 5px;
+  color: white;
+  font-size: 1.2em;
+  margin-left: 5px;
+}
+
+.column a {
+  color: transparent;
+  text-decoration: none;
+  margin-right: 10px;
+  text-align: bottom;
+}
+
+.icon {
+  margin-right: 15px;
+  margin-top: 15px;
+  align-self: center;
+  max-width: 40px;
+  max-height: 30px;
+}
+
+.p_icon {
+  color: white;
+  width: 15px;
+  height: 15px;
+  margin-right: 15px;
+  margin-left: 20px;
+  align-self: center;
+}
+
+.social_icon {
+  margin-top: 40px;
+  padding-left: 15px;
+  color: white;
+  width: 20px;
+  height: 20px;
+}
+
+.contact {
+  background-image: url("/public/image-parrot.png");
+  background-repeat: no-repeat;
+  background-size: 85%;
+  background-position: bottom;
+}

@@ -124,40 +124,40 @@ const Register = () => {
   return (
     <div className={styles.form_container}>
       <h2 className={styles.form_title}>Register</h2>
-
-      <div className={styles.input_icon_wrapper}>
-        <FiUser className={styles.input_icon_left} />
-        <input
-          className={`${styles.input} ${
-            isFullNameEmpty ? styles.empty_error : ""
-          }`}
-          type="text"
-          id="fullname"
-          value={fullName}
-          onChange={(e) => {
-            setIsFullNameEmpty(false);
-            setFullName(e.target.value);
-          }}
-          placeholder="full name"
-        />
-      </div>
-
       <div className={styles.input_field}>
         <div className={styles.input_icon_wrapper}>
-          <FiMail className={styles.input_icon_left} />
+          <FiUser className={styles.input_icon_left} />
           <input
             className={`${styles.input} ${
-              isEmailEmpty ? styles.empty_error : ""
+              isFullNameEmpty ? styles.empty_error : ""
             }`}
-            type="email"
-            id="email"
-            value={email}
+            type="text"
+            id="fullname"
+            value={fullName}
             onChange={(e) => {
-              handleEmailChange(e);
-              setIsEmailEmpty(false);
+              setIsFullNameEmpty(false);
+              setFullName(e.target.value);
             }}
-            placeholder="email"
+            placeholder="full name"
           />
+        </div>
+        <div className={styles.input_field}>
+          <div className={styles.input_icon_wrapper}>
+            <FiMail className={styles.input_icon_left} />
+            <input
+              className={`${styles.input} ${
+                isEmailEmpty ? styles.empty_error : ""
+              }`}
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => {
+                handleEmailChange(e);
+                setIsEmailEmpty(false);
+              }}
+              placeholder="email"
+            />
+          </div>
           {emailError && <p className={styles.error_message}>{emailError}</p>}
         </div>
         <div className={styles.input_field}>

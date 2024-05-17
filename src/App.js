@@ -7,6 +7,7 @@ import Adoption from "./pages/Adoption/Adoption";
 import SignUp from "./pages/Singup";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Info from "./pages/Info/Info";
 import React from "react";
 import "./App.css";
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/review" element={<Review />} />
           <Route path="/adoption" element={<Adoption />} />
+          <Route path="/info" element={<Info />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/register" element={<Register />} />
