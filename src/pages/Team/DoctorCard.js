@@ -4,8 +4,12 @@ import styles from "./DoctorCard.module.css";
 const DoctorCard = ({ doctor }) => (
   <div className={styles.container}>
     <div className={styles.card}>
-      <br></br>
       <div className={styles.column}>
+        <img
+          src={doctor.imageUrl}
+          alt={doctor.fullname}
+          className={styles.image}
+        />
         <h2>{doctor.fullname}</h2>
         <div className={styles.details}>
           <p className={styles.bold_text}>

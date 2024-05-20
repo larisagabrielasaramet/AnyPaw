@@ -10,13 +10,13 @@
   flex-direction: columnn;
   background-color: #f8f9fa;
 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px 0 #006666;
   margin-top: 100px;
   margin-left: 0px;
   margin-right: 40px;
   padding: 20px;
   height: 550px;
-  width: 400px; /* Adjust this value as needed */
+  width: 400px;
 }
 
 .column {
@@ -48,4 +48,13 @@
   color: #006666;
   font-style: bold;
   font-style: italic;
+}
+
+.image {
+  display: block;
+  max-width: 50%;
+  height: auto;
+  margin: 0 auto;
+  height: 200px;
+  object-fit: cover;
 }

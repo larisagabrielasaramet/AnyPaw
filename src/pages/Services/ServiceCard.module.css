@@ -1,0 +1,8 @@
+.card {
+  flex: 0 0 calc(50% - 20px); /* Adjust this value as needed */
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px 0 #006666;
+  margin: 10px;
+  padding: 20px;
+  overflow: auto;
+}
