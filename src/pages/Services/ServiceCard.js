@@ -1,31 +1,38 @@
 import React, { useState } from "react";
 import styles from "./ServiceCard.module.css";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
-  const [showMore, setShowMore] = useState(false);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    setShowMore(!showMore);
-  };
+  const [showMore] = useState(false);
 
   return (
     <div className={styles.container}>
       <div className={styles.card}>
+        <img
+          src={service.logoUrl}
+          alt={service.title}
+          className={styles.logo}
+        />
         <div className={styles.column}>
           <h2>{service.title}</h2>
           <p>{service.cardDescription}</p>
-          <button onClick={handleClick}>{showMore ? "Less" : "More"}</button>
+          <Link to={`/services/${service.title}`} className={styles.button}>
+            More
+          </Link>
           {showMore && (
             <div className={styles.details}>
               <p className={styles.bold_text}>
                 <span className={styles.span}>Description:</span>{" "}
                 {service.description}
               </p>
-              <p className={styles.bold_text}>
-                <span className={styles.span}>Services:</span>{" "}
-                {service.services}
-              </p>
+              <div className={styles.bold_text}>
+                <span className={styles.span}>Services:</span>
+                <ul className={styles.servicesList}>
+                  {service.services.map((serviceItem, index) => (
+                    <li key={index}>{serviceItem}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           )}
         </div>

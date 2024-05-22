@@ -21,7 +21,6 @@ const Services = () => {
 
   return (
     <div className={styles.servicesContainer}>
-      <h1>Services</h1>
       {services.map((service, index) => (
         <ServiceCard key={index} service={service} />
       ))}

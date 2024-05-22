@@ -1,0 +1,51 @@
+.AddReview {
+  position: fixed;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 36px;
+  width: 450px;
+  height: 83%;
+  margin-left: -100px;
+  background-color: #f7f7f7;
+}
+.AddReview h2 {
+  margin-top: 0px;
+  margin-bottom: 60px;
+  font-size: 2.2em;
+}
+
+.input {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 40px;
+  border: 1px solid #008080;
+  border-radius: 36px;
+}
+
+.fieldContainer {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  border-color: #008080;
+}
+.button {
+  width: 30%;
+  height: 50px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #006666;
+  margin-top: 30px;
+  color: #fff;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 24px;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}

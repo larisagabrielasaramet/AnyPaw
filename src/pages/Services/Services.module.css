@@ -1,7 +1,14 @@
 .servicesContainer {
+  margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  height: 95vh;
   overflow: auto;
-  height: 100vh; /* Adjust this value as needed */
+  scrollbar-width: none;
+  margin-bottom: 50px;
+}
+
+.servicesContainer::-webkit-scrollbar {
+  display: none;
 }

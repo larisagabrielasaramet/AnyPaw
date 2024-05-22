@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviewsColumn {
+  flex: 3;
+  margin-right: 20px;
+}
+
+.addReviewColumn {
+  flex: 1;
+}
+
+.ratingContainer {
+  margin-top: 50px;
+  margin-left: 30px;
+  border: 1px solid transparent;
+  padding: 10px;
+  border-radius: 26px;
+  margin-bottom: 20px;
+  max-height: 250px;
+  margin-left: -60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transform: scale(0.9);
+}
+
+.averageRating {
+  border: 1px solid #ccc;
+  background-color: #ffd700;
+  padding: 25px;
+  border-radius: 24px;
+  width: 50px;
+  height: 40px;
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.ratingBars {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 850px;
+  margin-bottom: 20px;
+}
+
+.ratingBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -20px;
+}
+
+.bar {
+  flex-grow: 1;
+  height: 10px;
+  background-color: #ddd;
+  margin-left: 5px;
+  border-radius: 36px;
+}
+
+.averageRating p {
+  color: white;
+  font-weight: bold;
+  margin: 0;
+  align-items: center;
+}
+.filledBar {
+  height: 100%;
+  background-color: #ffd700;
+  border-radius: 36px;
+}
+
+.reviewsContainer {
+  margin-top: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input,
+.form textarea {
+  margin-bottom: 10px;
+}

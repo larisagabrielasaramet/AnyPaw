@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.card {
+  margin: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 40px 36px #006666;
+  padding: 50px;
+  border-radius: 36px;
+  height: 400px;
+  width: 1000px;
+}
+
+h2 {
+  font-size: 2em;
+  color: #006666;
+  align-self: center;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #006666;
+  margin-bottom: 20px;
+}
+
+ul {
+  color: #006666;
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
