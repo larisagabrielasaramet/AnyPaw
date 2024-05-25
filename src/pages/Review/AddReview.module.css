@@ -6,24 +6,26 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffd700;
+
   border-radius: 36px;
-  width: 450px;
+  width: 390px;
   height: 83%;
-  margin-left: -100px;
+  margin-left: -40px;
   background-color: #f7f7f7;
 }
 .AddReview h2 {
   margin-top: 0px;
   margin-bottom: 60px;
-  font-size: 2.2em;
+  font-size: 2.5em;
+  color: #ffd700;
 }
 
 .input {
   width: 100%;
   padding: 20px;
   margin-bottom: 40px;
-  border: 1px solid #008080;
+  border: 1px solid #ffd700;
   border-radius: 36px;
 }
 
@@ -31,14 +33,14 @@
   width: 80%;
   display: flex;
   justify-content: center;
-  border-color: #008080;
+  border-color: #ffd700;
 }
 .button {
   width: 30%;
   height: 50px;
   padding: 10px 20px;
   border: none;
-  background-color: #006666;
+  background-color: #ffd700;
   margin-top: 30px;
   color: #fff;
   font-size: 1.2em;
@@ -47,5 +49,5 @@
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #c7ad1c;
 }

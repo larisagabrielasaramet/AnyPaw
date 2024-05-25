@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { FIREBASE_DB } from "../../firebase/firebase";
 import ReviewCard from "./ReviewCard";
 import styles from "./Review.module.css";
@@ -11,18 +16,42 @@ const Review = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const fetchReviews = async () => {
-      const reviewsCollection = collection(FIREBASE_DB, "reviews");
-      const reviewDocs = await getDocs(reviewsCollection);
-      setReviews(reviewDocs.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
+    const reviewsCollection = collection(FIREBASE_DB, "reviews");
+    const unsubscribe = onSnapshot(reviewsCollection, (snapshot) => {
+      const newReviews = snapshot.docs
+        .map((doc) => {
+          const data = doc.data();
+          return {
+            ...data,
+            id: doc.id,
+            date: data.createdAt ? data.createdAt.toDate() : null, // check if createdAt exists before calling toDate()
+          };
+        })
+        .filter((review) => review.isPosted);
+      setReviews(newReviews);
+    });
 
-    fetchReviews();
+    return () => unsubscribe();
   }, []);
 
+  const handleAddReview = async (review) => {
+    const docRef = await addDoc(collection(FIREBASE_DB, "reviews"), {
+      ...review,
+      createdAt: serverTimestamp(),
+      isPosted: false,
+    });
+
+    setReviews((prevReviews) => [
+      { ...review, id: docRef.id, isPosted: false },
+      ...prevReviews,
+    ]);
+  };
+
   const averageRating =
-    reviews.reduce((total, review) => total + Number(review.rating), 0) /
-    reviews.length;
+    reviews.length > 0
+      ? reviews.reduce((total, review) => total + Number(review.rating), 0) /
+        reviews.length
+      : 0;
 
   const ratingCounts = [1, 2, 3, 4, 5].map(
     (rating) =>
@@ -30,8 +59,8 @@ const Review = () => {
   );
   return (
     <div className={styles.container}>
-      <div className={styles.reviewsColumn}>
-        <div className={styles.ratingContainer}>
+      <div className={styles.ratingColumn}>
+        <div className={styles.raintigContainer}>
           <div className={styles.averageRating}>
             <p>{averageRating.toFixed(2)}</p>
           </div>
@@ -51,14 +80,16 @@ const Review = () => {
             ))}
           </div>
         </div>
+      </div>
+      <div className={styles.reviewsColumn}>
         <div className={styles.reviewsContainer}>
-          {reviews.map((review) => (
+          {[...reviews].reverse().map((review) => (
             <ReviewCard key={review.id} review={review} />
           ))}
         </div>
       </div>
       <div className={styles.addReviewColumn}>
-        <AddReview setReviews={setReviews} />
+        <AddReview handleAddReview={handleAddReview} />
       </div>
     </div>
   );

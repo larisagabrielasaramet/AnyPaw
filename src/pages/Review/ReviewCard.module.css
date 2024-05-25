@@ -1,23 +1,34 @@
 .card {
-  width: 300px;
-  height: 200px; /* modificat pentru a permite două carduri pe rând */
-  background-color: #fff;
-  border: 1px solid #eee;
-  border-radius: 5px;
+  width: 240px;
+  height: 150px;
+  background-color: #f7f7f7;
+  border: 1px solid #ffd700;
+  border-radius: 16px;
   padding: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   display: flex;
-  flex-direction: column; /* modificat pentru a aranja elementele vertical */
+  flex-direction: column;
   margin-bottom: 15px;
-  margin-left: 20px;
 }
 
-.card .name .content {
+.card h3 {
   font-weight: bold;
-  margin-bottom: 5px;
+  font-size: 1.4em;
+  margin-top: 5px;
+  margin-left: 3px;
+  margin-bottom: 0px;
+  padding: 2px;
 }
 
-.card .rating {
-  align-self: flex-end;
-  /* aliniază ratingul la dreapta */
+.card p {
+  margin-left: 3px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 5px;
+  color: black;
+}
+
+.card span {
+  align-self: center;
+  margin-top: 3px;
 }

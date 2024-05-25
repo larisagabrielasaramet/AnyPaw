@@ -1,20 +1,20 @@
 .form_title {
-  font-size: 2em; /* Make the font larger */
+  font-size: 2em;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  color: #006666; /* Change the color */
-  text-align: center; /* Center the text */
-  margin-bottom: 20px; /* Add some space below the title */
-  text-transform: bold; /* Make the text uppercase */
-  letter-spacing: 1px; /* Increase spacing between letters */
+  color: #006666;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: bold;
+  letter-spacing: 1px;
 }
 .form_container {
   max-width: 300px;
-  margin: 200px auto;
-  padding: 20px;
+  margin: 220px auto;
+  padding: 40px;
   background-color: #f7f7f7;
   border-radius: 24px;
-  box-shadow: 0 4px 8px #006666;
+  box-shadow: 0 8px 16px #006666;
   text-align: center;
 }
 
@@ -30,8 +30,9 @@
 }
 
 .input {
-  width: 90%;
-  padding: 10px;
+  width: 95%;
+  height: 45px;
+  padding: 15px;
   padding-right: 40px;
   padding-left: 40px;
   border: 1px solid #006666;
@@ -41,13 +42,15 @@
 
 .btn {
   width: 50%;
-  padding: 10px;
+  height: 45px;
+  padding: 15px;
+  font-size: 1em;
   background-color: #008080;
   color: white;
   border: none;
   border-radius: 24px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .btn:hover {

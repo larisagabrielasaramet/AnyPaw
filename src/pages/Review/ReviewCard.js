@@ -4,7 +4,7 @@ import ReactStars from "react-rating-stars-component";
 
 const ReviewCard = ({ review }) => (
   <div className={styles.card}>
-    <data>{review.date}</data>
+    <data>{new Date(review.date).toLocaleDateString()}</data>
     <h3>{review.author}</h3>
     <p>{review.content}</p>
     <p className={styles.bold_text}>
