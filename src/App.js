@@ -10,6 +10,7 @@ import Register from "./pages/Register/Register";
 import Info from "./pages/Info/Info";
 import React from "react";
 import ServiceDetails from "./pages/Services/ServiceDetails";
+import AdoptionDetails from "./pages/Adoption/AdoptionDetails";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -30,6 +31,7 @@ function App() {
           <Route path="/signin" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/services/:title" element={<ServiceDetails />} />
+          <Route path="/adoptions/:title" element={<AdoptionDetails />} />
         </Routes>
       </Router>
     </div>

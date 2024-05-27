@@ -15,11 +15,11 @@ export const Nav = styled.nav`
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  border-radius: 0px 0px 0px 0px; /* Round the bottom corners */
+  border-radius: 0px 0px 0px 0px;
 `;
 
 export const NavLink = styled(Link)`
-  color: white; /* Alb */
+  color: white;
   display: flex;
   margin-right: 20px;
   align-items: center;
@@ -29,7 +29,7 @@ export const NavLink = styled(Link)`
   height: 100%;
   cursor: pointer;
   &.active {
-    color: #add8e6; /* Alta nuanță de Turquoise */
+    color: #add8e6;
   }
 `;
 
@@ -58,7 +58,7 @@ export const NavMenu = styled.div`
 `;
 
 export const NavBtn = styled.nav`
-  background: #008080; /* Dark Turquoise */
+  background: #008080;
   display: flex;
   align-items: center;
   margin-left: auto;
@@ -87,5 +87,7 @@ export const NavBtnLink = styled(Link)`
 
 export const LogoContainer = styled.div`
   display: flex;
+  align-items: center;
+  margin-left: 30px;
   margin-right: auto;
 `;

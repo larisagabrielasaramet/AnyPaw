@@ -1,6 +1,6 @@
 .container {
   flex: 0 0 30%;
-  margin: 20px;
+  margin: 25px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -8,11 +8,10 @@
 }
 
 .card {
-  margin: 20px;
+  margin: 30px;
   background-color: #5f9ea0;
   box-shadow: 0 4px 16px #006666;
   padding: 30px;
-
   border-radius: 24px;
   height: 300px;
   width: 300px;

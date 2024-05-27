@@ -1,0 +1,40 @@
+.adoptionDetailsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+
+.card {
+  margin-top: 60px;
+  width: 100%;
+  max-width: 1300px;
+  height: 600px;
+  padding: 60px;
+  background-color: #e4e3e3;
+  box-shadow: 0px 0px 10px rgb(230, 230, 79);
+  border-radius: 10px;
+}
+
+.card h2 {
+  margin-top: 5px;
+  margin-bottom: 30px;
+  font-style: oblique;
+  font-size: 3em;
+}
+
+.card p {
+  margin-bottom: 10px;
+}
+
+.images img {
+  margin-left: 15px;
+  margin-top: 50px;
+  width: 250px;
+  margin-right: 60px;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+  align-items: center;
+}

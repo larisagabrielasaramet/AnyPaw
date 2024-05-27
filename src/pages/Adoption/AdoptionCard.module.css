@@ -1,0 +1,50 @@
+.adoption_card {
+  margin-top: 20px;
+  display: flex;
+  border: 1px solid #ccc;
+  background-color: #e4e3e3;
+  width: 450px;
+  border-radius: 16px;
+  padding: 20px;
+  margin-left: 60px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 8px rgb(230, 230, 79);
+}
+
+.adoption_card h2 {
+  font-size: 24px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-style: bold;
+  font-size: 2em;
+}
+.adoption_card p {
+  font-size: 1.2em;
+  margin-top: 12px;
+  margin-bottom: 5px;
+}
+.adoption_card img {
+  width: 250px;
+  height: 250px;
+  margin-left: 0px;
+  margin-right: 10px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 16px;
+}
+
+.more_details {
+  margin-top: 20px;
+}
+
+.adoption_card button {
+  margin-left: 0px;
+  margin-top: 30px;
+  width: 80px;
+  height: 40px;
+  border-radius: 18px;
+  border: #006666;
+  font-size: 1.1em;
+  color: white;
+  background-color: #006666;
+}
