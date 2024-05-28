@@ -1,6 +1,4 @@
-// pages/index.js
-
-import React from "react";
+import React, { useEffect } from "react";
 
 import styles from "./Home.module.css";
 
@@ -11,6 +9,34 @@ const Home = () => {
       {letter}
     </span>
   ));
+
+  const openForm = () => {
+    window.open("https://zqfp4mlm.forms.app/application-form", "_blank");
+
+    // new window.formsapp("6651ce50967f9a2e38c3bcf3", "popup", {
+    //   overlay: "rgba(45,45,45,0.83)",
+    //   button: { color: "#006666", text: "Join our team" },
+    //   width: "800px",
+    //   height: "600px",
+    //   openingAnimation: {
+    //     entrance: "animate__fadeIn",
+    //     exit: "animate__fadeOut",
+    //   },
+    // });
+  };
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://forms.app/static/embed.js";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.paragraph}>
@@ -26,7 +52,9 @@ const Home = () => {
         >
           Make an appointment
         </button>
-        <button class={styles.custom_button}>Join our team</button>
+        <button onClick={openForm} className={styles.custom_button}>
+          Join our team
+        </button>
       </div>
       <div className={styles.footer}>
         <p>
