@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { FIREBASE_AUTH } from "../../firebase/firebase";
+import { FIREBASE_AUTH, FIREBASE_DB } from "../../firebase/firebase";
+import { getDocs, query, collection, where } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
 import Swal from "sweetalert2";
@@ -14,9 +15,38 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
-      alert("Login successful!");
+      const userCredential = await signInWithEmailAndPassword(
+        FIREBASE_AUTH,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log("User ID: ", user.uid);
+
+      // Query the "user" collection for documents where "uid" is equal to the user's ID
+      const querySnapshot = await getDocs(
+        query(collection(FIREBASE_DB, "user"), where("uid", "==", user.uid))
+      );
+
+      if (!querySnapshot.empty) {
+        // The user document was found
+        const docSnap = querySnapshot.docs[0];
+        const userData = docSnap.data();
+
+        // Check if the user is a doctor
+        if (userData.isDoctor) {
+          // Redirect to the doctor page
+          window.location.href = "/doctor";
+        } else {
+          // Redirect to the patient page
+          window.location.href = "/patient";
+        }
+      } else {
+        // No such document!
+        console.log("No such document!");
+      }
     } catch (error) {
+      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",

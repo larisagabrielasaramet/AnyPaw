@@ -11,27 +11,188 @@ import Info from "./pages/Info/Info";
 import React from "react";
 import ServiceDetails from "./pages/Services/ServiceDetails";
 import AdoptionDetails from "./pages/Adoption/AdoptionDetails";
+import DoctorPage from "./Components/Doctor/Homepage/DoctorPage";
+import DoctorNavbar from "./Components/Doctor/Homepage/NavBarDoc";
+import DoctorProfile from "./Components/Doctor/DoctorProfile/DoctorProfile";
+import AppointmentPage from "./Components/Doctor/Appointments/AppointmentPage";
+import PacientPage from "./Components/Doctor/Pacients/PacientPage";
+import PacientProfile from "./Components/Pacient/PacientProfile";
+import PacientAppointments from "./Components/Pacient/PacientAppointments";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PatientNavbar from "./Components/Pacient/PatientNavBar";
 
 function App() {
   return (
     <div>
       <Router>
-        <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/team" element={<Teams />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/review" element={<Review />} />
-          <Route path="/adoption" element={<Adoption />} />
-          <Route path="/info" element={<Info />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/signin" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/services/:title" element={<ServiceDetails />} />
-          <Route path="/adoptions/:title" element={<AdoptionDetails />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <Home />
+              </>
+            }
+          />
+          <Route
+            path="/team"
+            element={
+              <>
+                <Navbar />
+                <Teams />
+              </>
+            }
+          />
+          <Route
+            path="/services"
+            element={
+              <>
+                <Navbar />
+                <Services />
+              </>
+            }
+          />
+          <Route
+            path="/review"
+            element={
+              <>
+                <Navbar />
+                <Review />
+              </>
+            }
+          />
+          <Route
+            path="/adoption"
+            element={
+              <>
+                <Navbar />
+                <Adoption />
+              </>
+            }
+          />
+          <Route
+            path="/info"
+            element={
+              <>
+                <Navbar />
+                <Info />
+              </>
+            }
+          />
+          <Route
+            path="/sign-up"
+            element={
+              <>
+                <Navbar />
+                <SignUp />
+              </>
+            }
+          />
+          <Route
+            path="/signin"
+            element={
+              <>
+                <Navbar />
+                <Login />
+              </>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <>
+                <Navbar />
+                <Register />
+              </>
+            }
+          />
+          <Route
+            path="/services/:title"
+            element={
+              <>
+                <Navbar />
+                <ServiceDetails />
+              </>
+            }
+          />
+          <Route
+            path="/adoptions/:title"
+            element={
+              <>
+                <Navbar />
+                <AdoptionDetails />
+              </>
+            }
+          />
+          <Route
+            path="/doctor"
+            element={
+              <>
+                <DoctorNavbar />
+                <DoctorPage />
+              </>
+            }
+          />
+          <Route
+            path="/doctor/profile"
+            element={
+              <>
+                <DoctorNavbar />
+                <DoctorProfile />
+              </>
+            }
+          />
+
+          <Route
+            path="/doctor/appointments"
+            element={
+              <>
+                <DoctorNavbar />
+                <AppointmentPage />
+              </>
+            }
+          />
+
+          <Route
+            path="/doctor/patients"
+            element={
+              <>
+                <DoctorNavbar />
+                <PacientPage />
+              </>
+            }
+          />
+          <Route
+            path="/patient"
+            element={
+              <>
+                <PatientNavbar />
+                <PacientPage />
+              </>
+            }
+          />
+
+          <Route
+            path="/patient/profile"
+            element={
+              <>
+                <PatientNavbar />
+                <PacientProfile />
+              </>
+            }
+          />
+          <Route
+            path="/patient/appointments"
+            element={
+              <>
+                <PatientNavbar />
+                <PacientAppointments />
+              </>
+            }
+          />
         </Routes>
       </Router>
     </div>

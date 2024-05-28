@@ -1,0 +1,21 @@
+.patient_cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.patient_card {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+  margin: 16px;
+  width: calc(33% - 32px);
+}
+
+.patient_card h2 {
+  margin: 0 0 16px;
+}
+
+.patient_card p {
+  margin: 0 0 8px;
+}
