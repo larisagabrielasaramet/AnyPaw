@@ -1,16 +1,57 @@
-.appointment_table {
+.AppointmentPage {
+  background-color: azure;
   margin-top: 150px;
-  width: 100%;
-  border-collapse: collapse;
+  width: 93%;
+  border-collapse: separate;
+  border-spacing: 1px;
+  margin-left: 70px;
+  font-size: 1.2em;
+  table-layout: fixed;
 }
 
-.appointment-table th,
-.appointment-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+.AppointmentPage th,
+.AppointmentPage td {
+  border: 1px solid #181616;
+  /* adaugă o bordură în jurul fiecărei celule */
+  padding: 20px;
   text-align: center;
+  color: #008080;
+  font-family: Roboto, sans-serif;
+  font-style: bold;
 }
 
-.appointment-table th {
-  background-color: #f2f2f2;
+.appointment {
+  background-color: rgb(
+    253,
+    47,
+    47
+  ); /* adaugă un fundal gri deschis pentru celulele cu programări */
+}
+
+.nextButton,
+.prevButton {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 4em;
+  padding: 5px;
+}
+
+.nextButton::after {
+  content: "➡";
+  margin-right: 50px;
+  color: #008080;
+}
+
+.prevButton::before {
+  content: "⬅";
+  margin-left: 60px;
+  color: #008080;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
