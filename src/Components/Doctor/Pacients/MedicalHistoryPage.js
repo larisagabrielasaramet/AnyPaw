@@ -4,6 +4,7 @@ import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { FIREBASE_DB } from "../../../firebase/firebase";
 import Navbar from "../Homepage/NavBarDoc";
 import styles from "./MedicalHistoryPage.module.css";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 function MedicalHistoryPage() {
   const { petId } = useParams();
@@ -11,6 +12,20 @@ function MedicalHistoryPage() {
   const [petData, setPetData] = useState({});
   const [userData, setUserData] = useState({});
   const [newEntry, setNewEntry] = useState("");
+  const handleDeleteEntry = async (index) => {
+    const updatedHistory = medicalHistory.filter((_, i) => i !== index);
+    const petDoc = doc(FIREBASE_DB, "pet", petId);
+    await updateDoc(petDoc, {
+      entry: updatedHistory,
+    });
+    setMedicalHistory(updatedHistory);
+  };
+
+  const handleEditEntry = (index) => {
+    const entryToEdit = medicalHistory[index];
+    setNewEntry(entryToEdit);
+    handleDeleteEntry(index);
+  };
 
   useEffect(() => {
     const fetchMedicalHistory = async () => {
@@ -75,6 +90,20 @@ function MedicalHistoryPage() {
           {medicalHistory.map((entry, index) => (
             <li key={index} className={styles.listItem}>
               {entry}
+              <div className={styles.divider}>
+                <button
+                  onClick={() => handleEditEntry(index)}
+                  className={styles.button}
+                >
+                  <FaEdit />
+                </button>
+                <button
+                  onClick={() => handleDeleteEntry(index)}
+                  className={styles.button}
+                >
+                  <FaTrash />
+                </button>
+              </div>
             </li>
           ))}
         </ul>

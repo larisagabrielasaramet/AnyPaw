@@ -29,6 +29,7 @@ const DoctorNavbar = () => {
       <LogoContainer>{/* Add your logo here */}</LogoContainer>
       <Bars />
       <NavMenu>
+        <NavLink to="/doctor">Doctor Page</NavLink>
         <NavLink to="/doctor/profile">My Profile</NavLink>
         <NavLink to="/doctor/appointments">Appointments</NavLink>
         <NavLink to="/doctor/patients">My Patients</NavLink>

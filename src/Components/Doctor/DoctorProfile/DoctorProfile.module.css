@@ -1,0 +1,30 @@
+.container {
+  background-image: url("../../../../public/backgroundD.png");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  display: flex; /* Adăugați această linie */
+  justify-content: center; /* Aceasta aliniază elementele pe orizontală */
+  align-items: center; /* Aceasta aliniază elementele pe verticală */
+}
+.profileCard {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 16px 16px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  margin: auto; /* Aceasta va centra cardul în containerul flex */
+}
+
+.profileCard h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.profileCard p {
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+}

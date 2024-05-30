@@ -39,7 +39,7 @@ const DoctorPage = () => {
   }, []);
 
   return (
-    <div className={styles.doctor_page}>
+    <div className={styles.profileCard}>
       <h1>Welcome, dr. {doctorName}!</h1>
       <p>We're glad to have you here. Have a great day!</p>
     </div>
