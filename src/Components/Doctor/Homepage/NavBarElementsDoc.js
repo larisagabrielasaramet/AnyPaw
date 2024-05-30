@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const Nav = styled.nav`
   background: #008080; /* Dark Turquoise */
-
+  table-layout: fixed;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -36,6 +36,7 @@ export const NavLink = styled(Link)`
 
 export const Bars = styled(FaBars)`
   display: none;
+  table-layout: fixed;
   color: black; /* Alb */
   @media screen and (max-width: 768px) {
     display: white;

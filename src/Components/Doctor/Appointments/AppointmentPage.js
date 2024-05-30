@@ -6,11 +6,14 @@ import {
   getDoc,
   deleteDoc,
   onSnapshot,
-  updateDoc,
+  addDoc,
 } from "firebase/firestore";
 import { FIREBASE_DB } from "../../../firebase/firebase";
 import styles from "./AppointmentPage.module.css";
 import moment from "moment/moment";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const useHasAppointment = (appointments, week) => {
   return useMemo(() => {
@@ -49,13 +52,20 @@ function AppointmentPage() {
   });
 
   const petId = selectedAppointment?.petId;
+  const [petIdState, setPetId] = useState("");
   const [petDocRef, setPetDocRef] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [appointmentDate, setAppointmentDate] = useState(null);
 
   React.useEffect(() => {
     if (petId) {
       setPetDocRef(doc(FIREBASE_DB, "pet", petId));
+    } else {
+      console.error("Pet ID is undefined!");
     }
   }, [petId]);
 
@@ -65,6 +75,7 @@ function AppointmentPage() {
 
   async function handleAppointmentClick(appointment) {
     const petId = appointment.petId;
+    setPetId(petId);
     const petDocRef = doc(FIREBASE_DB, "pet", petId);
     setPetDocRef(petDocRef);
     const petDocSnap = await getDoc(petDocRef);
@@ -89,7 +100,7 @@ function AppointmentPage() {
             const data = doc.data();
             setSelectedAppointment({
               ...data,
-              notesSaved: data.notesSaved || false, // Set notesSaved from the database
+              notesSaved: data.notesSaved || false,
             });
           } else {
             console.log("No such document!");
@@ -112,9 +123,6 @@ function AppointmentPage() {
           selectedAppointment.id
         );
         await deleteDoc(appointmentRef);
-        console.log("Appointment deleted successfully");
-
-        // Actualizează starea appointments pentru a elimina programarea ștearsă
         setAppointments(
           appointments.filter(
             (appointment) => appointment.id !== selectedAppointment.id
@@ -130,26 +138,27 @@ function AppointmentPage() {
       console.error("Error deleting appointment:", error);
     }
   }
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      const querySnapshot = await getDocs(
-        collection(FIREBASE_DB, "dappointments")
-      );
-      const data = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id, // include the document ID
-        date: moment(doc.data().date.toDate()),
-      }));
-      console.log("fetchAppointments data:", data);
-      setAppointments(data);
-    };
 
+  const fetchAppointments = async () => {
+    const querySnapshot = await getDocs(
+      collection(FIREBASE_DB, "dappointments")
+    );
+    const data = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+      date: moment(doc.data().date.toDate()),
+    }));
+    console.log("fetchAppointments data:", data);
+    setAppointments(data);
+  };
+
+  useEffect(() => {
     fetchAppointments();
   }, []);
 
   moment.locale("en", {
     week: {
-      dow: 1, // Monday is the first day of the week
+      dow: 1,
     },
   });
 
@@ -177,11 +186,8 @@ function AppointmentPage() {
         if (petDoc.exists()) {
           const petData = petDoc.data();
           console.log(petData);
-
-          // Preia userId din petData
           const userId = petData.userId;
 
-          // Folosește userId pentru a prelua datele utilizatorului
           const userDocRef = doc(FIREBASE_DB, "user", userId);
           const userDocSnap = await getDoc(userDocRef);
 
@@ -192,7 +198,7 @@ function AppointmentPage() {
               phone: userData.phone,
               address: userData.address,
             });
-            console.log(userData.fullName); // Log the user's full name directly
+            console.log(userData.fullName);
           } else {
             console.error("No such user document!");
           }
@@ -203,26 +209,51 @@ function AppointmentPage() {
     }
   }, [petId]);
 
-  async function saveNotes() {
-    try {
-      if (selectedAppointment && selectedAppointment.id) {
-        const appointmentRef = doc(
-          FIREBASE_DB,
-          "dappointments",
-          selectedAppointment.id
-        );
-        await updateDoc(appointmentRef, {
-          notes: selectedAppointment.notes,
-          notesSaved: true, // Save notesSaved in the database
-        });
-        setSelectedAppointment({ ...selectedAppointment, notesSaved: true });
-        console.log("Notes saved successfully");
-      }
-    } catch (error) {
-      console.error("Error saving notes:", error);
-    }
+  function handlePetIdChange(event) {
+    setPetId(event.target.value);
   }
 
+  async function handleAddAppointment(day, hour) {
+    const firstDayOfWeek = moment()
+      .startOf("week")
+      .add(week * 7, "days");
+    const appointmentDate = firstDayOfWeek
+      .clone()
+      .add(day, "days")
+      .add(hour, "hours");
+
+    try {
+      setAppointmentDate(appointmentDate.toDate());
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+    handleShow();
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("petId:", petIdState);
+    if (!petIdState) {
+      console.error("Pet ID is not defined!");
+      return;
+    }
+    const newAppointment = {
+      petId: petIdState,
+      date: appointmentDate,
+    };
+
+    try {
+      const docRef = await addDoc(
+        collection(FIREBASE_DB, "dappointments"),
+        newAppointment
+      );
+      console.log("Document written with ID: ", docRef.id);
+      handleClose();
+      fetchAppointments();
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
   return (
     <div>
       <table className={styles.AppointmentPage}>
@@ -273,7 +304,10 @@ function AppointmentPage() {
                         Appointment
                       </button>
                     ) : (
-                      ""
+                      <button
+                        className={styles.addAppointmentButton}
+                        onClick={() => handleAddAppointment(index, hour)}
+                      ></button>
                     )}
                   </td>
                 );
@@ -282,13 +316,27 @@ function AppointmentPage() {
           ))}
         </tbody>
       </table>
-      {/* {selectedAppointment && (
-        <AppointmentDetails
-          appointment={selectedAppointment}
-          userDetails={userDetails}
-          petDetails={petDetails}
-        />
-      )} */}
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Appointment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formPetId">
+              <Form.Label>Pet ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter pet ID"
+                value={petIdState}
+                onChange={handlePetIdChange}
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
 
       {isPopupOpen && (
         <div className={styles.popup}>
@@ -309,34 +357,6 @@ function AppointmentPage() {
             <p>Age: {petDetails?.age}</p>
             <p>Owner: {userDetails && userDetails.fullName}</p>
             <p>Phone: {userDetails && userDetails.phone}</p>
-            {selectedAppointment.notesSaved ? (
-              <>
-                <p>Notes: {selectedAppointment.notes}</p>
-                <button
-                  onClick={() =>
-                    setSelectedAppointment({
-                      ...selectedAppointment,
-                      notesSaved: false,
-                    })
-                  }
-                >
-                  Edit Notes
-                </button>
-              </>
-            ) : (
-              <>
-                <textarea
-                  value={selectedAppointment.notes}
-                  onChange={(e) =>
-                    setSelectedAppointment({
-                      ...selectedAppointment,
-                      notes: e.target.value,
-                    })
-                  }
-                />
-                <button onClick={saveNotes}>Save Notes</button>
-              </>
-            )}
           </div>
 
           <div>

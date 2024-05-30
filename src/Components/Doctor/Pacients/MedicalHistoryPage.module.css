@@ -1,0 +1,56 @@
+.container {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 40px;
+  margin: 40px auto;
+  max-width: 1200px;
+  height: 800px;
+}
+
+.title,
+.subtitle {
+  color: #333;
+}
+
+.details {
+  color: #666;
+}
+
+.form {
+  margin: 20px 0;
+}
+
+.input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 50%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.listItem {
+  background-color: #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 50%;
+}

@@ -18,6 +18,7 @@ import AppointmentPage from "./Components/Doctor/Appointments/AppointmentPage";
 import PacientPage from "./Components/Doctor/Pacients/PacientPage";
 import PacientProfile from "./Components/Pacient/PacientProfile";
 import PacientAppointments from "./Components/Pacient/PacientAppointments";
+import MedicalHistoryPage from "./Components/Doctor/Pacients/MedicalHistoryPage";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -193,6 +194,9 @@ function App() {
               </>
             }
           />
+
+          <Route path="/patient/:petId" element={<MedicalHistoryPage />} />
+          <Route path="/" element={<PacientPage />} />
         </Routes>
       </Router>
     </div>
