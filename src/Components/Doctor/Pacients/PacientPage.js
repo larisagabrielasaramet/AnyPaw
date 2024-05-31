@@ -39,13 +39,16 @@ function PacientPage() {
   };
 
   return (
-    <div>
-      <h1>My Patients</h1>
-      <p>Here you can see all your patients</p>
+    <div className={styles.container}>
       {patients.map((patient) => (
         <div key={patient.id} className={styles.patient_card}>
           <h2>{patient.name}</h2>
-          <p>Species: {patient.type}</p>
+          <p>
+            <strong>ID:</strong> {patient.id}
+          </p>
+          <p>
+            <strong>Breed:</strong> {patient.type}
+          </p>
           <button onClick={() => handleHistoryClick(patient.id)}>
             Medical History
           </button>

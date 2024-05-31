@@ -41,7 +41,7 @@ const DoctorProfile = () => {
   return (
     <div className={styles.container}>
       <div className={styles.profileCard}>
-        <h1>Doctor: {doctorData?.fullName}</h1>
+        <h1> {doctorData?.fullName}</h1>
         <p>
           <strong>Email:</strong> {doctorData?.email}
         </p>

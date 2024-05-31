@@ -7,13 +7,17 @@ import {
   deleteDoc,
   onSnapshot,
   addDoc,
+  where,
+  query,
 } from "firebase/firestore";
-import { FIREBASE_DB } from "../../../firebase/firebase";
+import { FIREBASE_DB, FIREBASE_AUTH } from "../../../firebase/firebase";
 import styles from "./AppointmentPage.module.css";
 import moment from "moment/moment";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const useHasAppointment = (appointments, week) => {
   return useMemo(() => {
@@ -140,8 +144,18 @@ function AppointmentPage() {
   }
 
   const fetchAppointments = async () => {
+    const userId = FIREBASE_AUTH.currentUser
+      ? FIREBASE_AUTH.currentUser.uid
+      : null;
+    if (!userId) {
+      console.error("User is not logged in!");
+      return;
+    }
     const querySnapshot = await getDocs(
-      collection(FIREBASE_DB, "dappointments")
+      query(
+        collection(FIREBASE_DB, "dappointments"),
+        where("userId", "==", userId)
+      )
     );
     const data = querySnapshot.docs.map((doc) => ({
       ...doc.data(),
@@ -237,9 +251,14 @@ function AppointmentPage() {
       console.error("Pet ID is not defined!");
       return;
     }
+
+    const userId = FIREBASE_AUTH.currentUser
+      ? FIREBASE_AUTH.currentUser.uid
+      : null;
     const newAppointment = {
       petId: petIdState,
       date: appointmentDate,
+      userId: userId,
     };
 
     try {
@@ -255,7 +274,7 @@ function AppointmentPage() {
     }
   };
   return (
-    <div>
+    <div className={styles.appointmentContainer}>
       <table className={styles.AppointmentPage}>
         <thead>
           <tr>
@@ -316,47 +335,75 @@ function AppointmentPage() {
           ))}
         </tbody>
       </table>
+
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Appointment</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formPetId">
-              <Form.Label>Pet ID</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter pet ID"
-                value={petIdState}
-                onChange={handlePetIdChange}
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Modal.Body>
+        <div className={styles.popup_app}>
+          <div className={styles.popup_inner_app}>
+            <Modal.Header>
+              <Modal.Title></Modal.Title>
+              <Button className={styles.closeButton} onClick={handleClose}>
+                X
+              </Button>
+            </Modal.Header>
+            <Modal.Body>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formPetId">
+                  <Form.Label></Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter pet ID"
+                    value={petIdState}
+                    onChange={handlePetIdChange}
+                    className={styles.inputField}
+                  />
+                </Form.Group>
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className={styles.submitButton}
+                >
+                  Submit
+                </Button>
+              </Form>
+            </Modal.Body>
+          </div>
+        </div>
       </Modal>
 
       {isPopupOpen && (
         <div className={styles.popup}>
           <div className={styles.popup_inner}>
-            <button onClick={handleClosePopup}>Close</button>
-            <button onClick={deleteAppointment}>Delete Appointment</button>
+            <button className={styles.deleteButton} onClick={deleteAppointment}>
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+            <button className={styles.closeButton} onClick={handleClosePopup}>
+              x
+            </button>
+
             <h2>Appointment Details</h2>
             <p>
-              Date:{" "}
+              <strong>Date:</strong>{" "}
               {selectedAppointment && selectedAppointment.date
                 ? moment(selectedAppointment.date).format(
                     "MMMM Do YYYY, h:mm:ss a"
                   )
                 : "No appointment selected"}
             </p>
-            <p>Pet's name: {petDetails?.name}</p>
-            <p>Breed: {petDetails?.type}</p>
-            <p>Age: {petDetails?.age}</p>
-            <p>Owner: {userDetails && userDetails.fullName}</p>
-            <p>Phone: {userDetails && userDetails.phone}</p>
+            <p>
+              <strong>Pet's name:</strong> {petDetails?.name}
+            </p>
+            <p>
+              <strong>Breed:</strong> {petDetails?.type}
+            </p>
+            <p>
+              <strong>Age:</strong> {petDetails?.age}
+            </p>
+            <p>
+              <strong>Owner:</strong> {userDetails && userDetails.fullName}
+            </p>
+            <p>
+              <strong>Phone:</strong> {userDetails && userDetails.phone}
+            </p>
           </div>
 
           <div>

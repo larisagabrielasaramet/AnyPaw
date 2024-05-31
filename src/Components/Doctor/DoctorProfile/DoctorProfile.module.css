@@ -1,9 +1,11 @@
 .container {
-  background-image: url("../../../../public/backgroundD.png");
+  background-image: url("../../../../public/girrafa.png");
   background-size: cover;
   background-position: center;
-  height: 100vh;
-  width: 100%;
+  margin-top: 100px;
+  height: 90vh;
+  width: 20%;
+  margin-left: 100px;
   display: flex; /* Adăugați această linie */
   justify-content: center; /* Aceasta aliniază elementele pe orizontală */
   align-items: center; /* Aceasta aliniază elementele pe verticală */
@@ -11,20 +13,24 @@
 .profileCard {
   background-color: white;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 16px 16px rgba(0, 0, 0, 0.1);
-  width: 500px;
-  margin: auto; /* Aceasta va centra cardul în containerul flex */
+  border-radius: 296px;
+  box-shadow: 0px 16px 16px #006666;
+  width: 600px;
+  height: 300px;
+  margin-right: -1600px;
+  margin-bottom: 120px;
 }
 
 .profileCard h1 {
+  margin-top: 40px;
+  color: #006666;
   text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 35px;
+  margin-bottom: 30px;
 }
 
 .profileCard p {
-  text-align: center;
-  font-size: 18px;
+  margin-left: 200px;
+  font-size: 20px;
   line-height: 1.6;
 }

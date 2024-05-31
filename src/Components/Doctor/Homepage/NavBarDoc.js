@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FIREBASE_AUTH as auth } from "../../../firebase/firebase";
+import Logo from "../../../Components/Logo";
 
 import {
   Nav,
@@ -26,10 +27,14 @@ const DoctorNavbar = () => {
 
   return (
     <Nav>
-      <LogoContainer>{/* Add your logo here */}</LogoContainer>
+      <LogoContainer>
+        <Logo />
+      </LogoContainer>
       <Bars />
       <NavMenu>
-        <NavLink to="/doctor">Doctor Page</NavLink>
+        <NavLink to="/doctor" end>
+          Homepage
+        </NavLink>
         <NavLink to="/doctor/profile">My Profile</NavLink>
         <NavLink to="/doctor/appointments">Appointments</NavLink>
         <NavLink to="/doctor/patients">My Patients</NavLink>

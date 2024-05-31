@@ -19,6 +19,7 @@ import PacientPage from "./Components/Doctor/Pacients/PacientPage";
 import PacientProfile from "./Components/Pacient/PacientProfile";
 import PacientAppointments from "./Components/Pacient/PacientAppointments";
 import MedicalHistoryPage from "./Components/Doctor/Pacients/MedicalHistoryPage";
+import AdoptionForm from "./pages/Adoption/AdoptionForm";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -171,7 +172,53 @@ function App() {
             element={
               <>
                 <PatientNavbar />
-                <PacientPage />
+                <Home />
+              </>
+            }
+          />
+          <Route
+            path="/patient/team"
+            element={
+              <>
+                <PatientNavbar />
+                <Teams />
+              </>
+            }
+          />
+          <Route
+            path="/patient/services"
+            element={
+              <>
+                <PatientNavbar />
+                <Services />
+              </>
+            }
+          />
+
+          <Route
+            path="/patient/review"
+            element={
+              <>
+                <PatientNavbar />
+                <Review />
+              </>
+            }
+          />
+          <Route
+            path="/patient/adoption"
+            element={
+              <>
+                <PatientNavbar />
+                <Adoption />
+              </>
+            }
+          />
+          <Route
+            path="/patient/info"
+            element={
+              <>
+                <PatientNavbar />
+                <Info />
               </>
             }
           />
@@ -197,6 +244,7 @@ function App() {
 
           <Route path="/patient/:petId" element={<MedicalHistoryPage />} />
           <Route path="/" element={<PacientPage />} />
+          <Route path="/form" element={<AdoptionForm />} />
         </Routes>
       </Router>
     </div>

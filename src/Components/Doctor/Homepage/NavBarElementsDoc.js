@@ -30,7 +30,7 @@ export const NavLink = styled(Link)`
   height: 100%;
   cursor: pointer;
   &.active {
-    color: #add8e6;
+    color: #5f9ea0;
   }
 `;
 
@@ -64,21 +64,21 @@ export const NavBtn = styled.nav`
   display: flex;
   align-items: center;
   margin-left: auto;
-  margin-right: -180px;
+  margin-right: -100px;
 `;
 
 export const NavBtnLink = styled(Link)`
-  align-items: center;
   border-radius: 24px;
+  padding: 5px;
   background: #5F9EA0; 
   padding: 10px 20px;
   font-size: 1.3rem;
-  font-align: center;
+  text-align: center;
   color: white; 
   outline: none;
   border: none;
   cursor: pointer;
-  height: 45px;
+  height: 50px;
   width: 60px;
  
   transition: all 0.2s ease-in-out;
@@ -87,12 +87,11 @@ export const NavBtnLink = styled(Link)`
   &:hover {
     transition: all 0.2s ease-in-out;
     background: #006666; 
-    color: #add8e6; 
+    color: #5F9EA0; 
 `;
 
 export const LogoContainer = styled.div`
   display: flex;
-  align-items: center;
   margin-left: 30px;
-  margin-right: auto;
+  margin-right: 5px;
 `;

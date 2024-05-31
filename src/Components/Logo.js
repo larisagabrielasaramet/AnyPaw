@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./logo.png";
 function Logo() {
   return (
-    <div style={{ position: "absolute", top: 3, left: 180 }}>
+    <div style={{ position: "absolute", top: 11, left: 280 }}>
       <img
         src={logo}
         alt="Logo"

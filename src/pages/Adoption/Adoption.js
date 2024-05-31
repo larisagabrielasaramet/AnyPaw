@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { collection, getDocs, getDoc, doc } from "firebase/firestore";
-import { FIREBASE_DB } from "../../firebase/firebase";
+import { FIREBASE_DB, FIREBASE_AUTH } from "../../firebase/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+
 import AdoptionCard from "./AdoptionCard";
 import styles from "./Adoption.module.css";
 import { Link } from "react-router-dom";
 
 const Adoption = () => {
   const [adoptions, setAdoptions] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      setCurrentUser(user);
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchAdoptions = async () => {
@@ -38,7 +50,7 @@ const Adoption = () => {
     <div className={styles.container}>
       <div className={styles.motto}>
         <h3>Adopt today and change a life forever.</h3>
-        <Link to="/signin">
+        <Link to={currentUser ? "/form" : "/signin"}>
           <button className={styles.adopt_button}>Add New Adoption</button>
         </Link>
       </div>

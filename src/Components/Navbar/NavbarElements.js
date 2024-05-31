@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 export const Nav = styled.nav`
   background: #008080; /* Dark Turquoise */
-
-  height: 60px;
+  table-layout: fixed;
+  height: 80px;
   display: flex;
   justify-content: space-between;
   padding: 0.2rem calc((100vw - 1000px) / 2);
@@ -26,15 +26,17 @@ export const NavLink = styled(Link)`
   text-decoration: none;
   padding-left: 50px;
   padding: 0 1rem;
+  font-size: 1.3rem;
   height: 100%;
   cursor: pointer;
   &.active {
-    color: #add8e6;
+    color: #5f9ea0;
   }
 `;
 
 export const Bars = styled(FaBars)`
   display: none;
+  table-layout: fixed;
   color: black; /* Alb */
   @media screen and (max-width: 768px) {
     display: white;
@@ -66,28 +68,31 @@ export const NavBtn = styled.nav`
 `;
 
 export const NavBtnLink = styled(Link)`
-  align-items: center;
   border-radius: 24px;
-  background: #5F9EA0; 
+  background: #5f9ea0;
   padding: 10px 20px;
-  color: white; 
+  font-size: 1.3rem;
+  color: white;
   outline: none;
   border: none;
   cursor: pointer;
-  height: 25px;
-  width: 50px;
+  height: 40px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  margin-left: 75px;
+  margin-left: 80px;
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: #006666; 
-    color: #add8e6; 
+    background: #006666;
+    color: #5f9ea0;
+  }
 `;
 
 export const LogoContainer = styled.div`
   display: flex;
-  align-items: center;
   margin-left: 30px;
-  margin-right: auto;
+  margin-right: 30px;
 `;

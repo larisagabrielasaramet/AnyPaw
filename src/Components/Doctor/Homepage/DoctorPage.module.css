@@ -1,17 +1,28 @@
 .doctor_page {
   display: flex;
   flex-direction: column;
+  background-image: url("../../../../public/hp-background.png");
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background-image: url("../../../../public/hp-background.png");
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: right;
+  overflow: auto;
   align-items: center;
   justify-content: center;
   height: 100vh;
   font-family: Arial, sans-serif;
-  background-color: rgb(196, 193, 193);
 }
 
 .doctor_page h1 {
   margin-top: 50px;
   color: #006666;
   font-size: 4.5em;
+  margin-left: -800px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   font-style: oblique;
@@ -21,6 +32,7 @@
   color: #006666;
   margin-top: 10px;
   font-size: 2.5em;
+  margin-left: -800px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }

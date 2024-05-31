@@ -1,8 +1,13 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { FIREBASE_AUTH } from "../../firebase/firebase";
 import styles from "./Home.module.css";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(null);
+
   const title = "Welcome to AnyPaw!";
   const letters = title.split("").map((letter, index) => (
     <span key={index} style={{ animationDelay: `${index * 0.1}s` }}>
@@ -23,6 +28,21 @@ const Home = () => {
     //     exit: "animate__fadeOut",
     //   },
     // });
+  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      setCurrentUser(user);
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
+  const handleAppointmentClick = () => {
+    if (!currentUser) {
+      navigate("/signin");
+    } else {
+      navigate("/patient/appointments");
+    }
   };
 
   useEffect(() => {
@@ -48,7 +68,7 @@ const Home = () => {
       <div className={styles.services_buttons}>
         <button
           className={styles.custom_button}
-          onClick={() => (window.location.href = "/signin")}
+          onClick={handleAppointmentClick}
         >
           Make an appointment
         </button>

@@ -21,7 +21,6 @@ const DoctorPage = () => {
       return null;
     }
   };
-
   useEffect(() => {
     const fetchDoctorName = async () => {
       const uid = FIREBASE_AUTH.currentUser
@@ -32,16 +31,21 @@ const DoctorPage = () => {
         const name = await getDoctorName(uid);
         console.log("Fetched name:", name);
         setDoctorName(name);
+        // Store the name in local storage
+        localStorage.setItem("doctorName", name);
       }
     };
-
+    const unsubscribe = FIREBASE_AUTH.onAuthStateChanged(fetchDoctorName);
     fetchDoctorName();
+    return () => unsubscribe();
   }, []);
 
   return (
-    <div className={styles.profileCard}>
-      <h1>Welcome, dr. {doctorName}!</h1>
-      <p>We're glad to have you here. Have a great day!</p>
+    <div className={styles.containe_doctorPage}>
+      <div className={styles.doctor_page}>
+        <h1>Welcome, dr. {doctorName}!</h1>
+        <p>We're glad to have you here. Have a great day!</p>
+      </div>
     </div>
   );
 };

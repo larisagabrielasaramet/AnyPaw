@@ -12,6 +12,7 @@ function MedicalHistoryPage() {
   const [petData, setPetData] = useState({});
   const [userData, setUserData] = useState({});
   const [newEntry, setNewEntry] = useState("");
+
   const handleDeleteEntry = async (index) => {
     const updatedHistory = medicalHistory.filter((_, i) => i !== index);
     const petDoc = doc(FIREBASE_DB, "pet", petId);
@@ -68,24 +69,37 @@ function MedicalHistoryPage() {
     <div className={styles.container}>
       <Navbar />
       <div className={styles.card}>
-        <h1 className={styles.title}>Medical History</h1>
-        <h2 className={styles.subtitle}>Pet Details</h2>
-        <p className={styles.details}>ID: {petId}</p>
-        <p className={styles.details}>Sex: {petData.sex}</p>
-        <p className={styles.details}>Type: {petData.type}</p>
-        <p className={styles.details}>Weight: {petData.weight}</p>
-        <form onSubmit={handleNewEntrySubmit} className={styles.form}>
-          <input
-            type="text"
-            value={newEntry}
-            onChange={handleNewEntryChange}
-            placeholder="Add new medical entry"
-            className={styles.input}
-          />
-          <button type="submit" className={styles.button}>
-            Add
-          </button>
-        </form>
+        <h1 className={styles.title}>{petData.name}</h1>
+        <div className={styles.detailsContainer}>
+          <div className={styles.petDetails}>
+            <h2 className={styles.subtitle}>Pet Details</h2>
+            <p className={styles.details}>
+              <strong>ID:</strong> {petId}
+            </p>
+            <p className={styles.details}>
+              <strong>Sex:</strong> {petData.sex}
+            </p>
+            <p className={styles.details}>
+              <strong>Type: </strong> {petData.type}
+            </p>
+            <p className={styles.details}>
+              <strong>Weight:</strong> {petData.weight}
+            </p>
+          </div>
+          <div className={styles.ownerDetails}>
+            <h2 className={styles.subtitle}>Owner Details</h2>
+            <p className={styles.details}>
+              <strong>Name:</strong> {userData.fullName}
+            </p>
+            <p className={styles.details}>
+              <strong>Phone:</strong> {userData.phone}
+            </p>
+            <p className={styles.details}>
+              <strong>Email: </strong> {userData.email}
+            </p>
+          </div>
+        </div>
+        <h2 className={styles.subtitle}>Medical History:</h2>
         <ul className={styles.list}>
           {medicalHistory.map((entry, index) => (
             <li key={index} className={styles.listItem}>
@@ -107,10 +121,18 @@ function MedicalHistoryPage() {
             </li>
           ))}
         </ul>
-        <h2 className={styles.subtitle}>Owner Details</h2>
-        <p className={styles.details}>Name: {userData.fullName}</p>
-        <p className={styles.details}>Phone: {userData.phone}</p>
-        <p className={styles.details}>Email: {userData.email}</p>
+        <form onSubmit={handleNewEntrySubmit} className={styles.form}>
+          <input
+            type="text"
+            value={newEntry}
+            onChange={handleNewEntryChange}
+            placeholder="Add new medical entry"
+            className={styles.input}
+          />
+          <button type="submit" className={styles.button}>
+            Add
+          </button>
+        </form>
       </div>
     </div>
   );
