@@ -1,44 +1,64 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "@firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { FIREBASE_DB, FIREBASE_AUTH } from "../../firebase/firebase";
+import styles from "./PacientProfile.module.css";
 
-const PatientProfile = () => {
-  const [name, setName] = useState("John Doe");
-  const [email, setEmail] = useState("john.doe@example.com");
-  const [medicalHistory, setMedicalHistory] = useState(
-    "No known medical history"
-  );
+const PacientProfile = () => {
+  const [pets, setPets] = useState([]);
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
+  const navigate = useNavigate();
+
+  const fetchPets = async () => {
+    const uid = FIREBASE_AUTH.currentUser
+      ? FIREBASE_AUTH.currentUser.uid
+      : null;
+    if (uid) {
+      const userQuerySnapshot = await getDocs(
+        query(collection(FIREBASE_DB, "user"), where("uid", "==", uid))
+      );
+      if (!userQuerySnapshot.empty) {
+        const userDoc = userQuerySnapshot.docs[0];
+        const userId = userDoc.id;
+        const petQuerySnapshot = await getDocs(
+          query(collection(FIREBASE_DB, "pet"), where("userId", "==", userId))
+        );
+        const data = petQuerySnapshot.docs.map((doc) => {
+          const petData = doc.data();
+          return {
+            ...petData,
+            id: doc.id,
+          };
+        });
+        setPets(data);
+      }
+    }
+  };
+  const handleHistoryClick = (id) => {
+    navigate(`/patient/${id}`);
   };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleMedicalHistoryChange = (event) => {
-    setMedicalHistory(event.target.value);
-  };
-
+  useEffect(() => {
+    fetchPets();
+  }, []);
   return (
-    <div>
-      <h1>Patient Profile</h1>
-      <label>
-        Name:
-        <input type="text" value={name} onChange={handleNameChange} />
-      </label>
-      <label>
-        Email:
-        <input type="email" value={email} onChange={handleEmailChange} />
-      </label>
-      <label>
-        Medical History:
-        <textarea
-          value={medicalHistory}
-          onChange={handleMedicalHistoryChange}
-        />
-      </label>
+    <div className={styles.container}>
+      {pets.map((pet) => (
+        <div key={pet.id} className={styles.patient_card}>
+          <h2>{pet.name}</h2>
+          <p>
+            <strong>ID:</strong> {pet.id}
+          </p>
+          <p>
+            <strong>Age:</strong> {pet.age}
+          </p>
+          <button onClick={() => handleHistoryClick(pet.id)}>
+            Medical History
+          </button>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default PatientProfile;
+export default PacientProfile;

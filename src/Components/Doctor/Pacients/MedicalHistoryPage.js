@@ -39,7 +39,8 @@ function MedicalHistoryPage() {
         const userDoc = doc(FIREBASE_DB, "user", petData.userId);
         const userDocSnapshot = await getDoc(userDoc);
         if (userDocSnapshot.exists()) {
-          setUserData(userDocSnapshot.data());
+          const currentUserData = userDocSnapshot.data();
+          setUserData(currentUserData);
         } else {
           console.log("No such user document!");
         }
@@ -104,35 +105,39 @@ function MedicalHistoryPage() {
           {medicalHistory.map((entry, index) => (
             <li key={index} className={styles.listItem}>
               {entry}
-              <div className={styles.divider}>
-                <button
-                  onClick={() => handleEditEntry(index)}
-                  className={styles.button}
-                >
-                  <FaEdit />
-                </button>
-                <button
-                  onClick={() => handleDeleteEntry(index)}
-                  className={styles.button}
-                >
-                  <FaTrash />
-                </button>
-              </div>
+              {userData.isDoctor && (
+                <div className={styles.divider}>
+                  <button
+                    onClick={() => handleEditEntry(index)}
+                    className={styles.button}
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    onClick={() => handleDeleteEntry(index)}
+                    className={styles.button}
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              )}
             </li>
           ))}
         </ul>
-        <form onSubmit={handleNewEntrySubmit} className={styles.form}>
-          <input
-            type="text"
-            value={newEntry}
-            onChange={handleNewEntryChange}
-            placeholder="Add new medical entry"
-            className={styles.input}
-          />
-          <button type="submit" className={styles.button}>
-            Add
-          </button>
-        </form>
+        {userData.isDoctor && (
+          <form onSubmit={handleNewEntrySubmit} className={styles.form}>
+            <input
+              type="text"
+              value={newEntry}
+              onChange={handleNewEntryChange}
+              placeholder="Add new medical entry"
+              className={styles.input}
+            />
+            <button type="submit" className={styles.button}>
+              Add
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
