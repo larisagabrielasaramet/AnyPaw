@@ -35,9 +35,8 @@ function PacientPage() {
 
   const handleHistoryClick = (id) => {
     fetchMedicalHistory(id);
-    navigate(`/patient/${id}`);
+    navigate(`/doctor/patients/${id}`);
   };
-
   return (
     <div className={styles.container}>
       {patients.map((patient) => (

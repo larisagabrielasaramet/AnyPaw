@@ -19,6 +19,7 @@ import PacientPage from "./Components/Doctor/Pacients/PacientPage";
 import PacientProfile from "./Components/Pacient/PacientProfile";
 import PacientAppointments from "./Components/Pacient/PacientAppointments";
 import MedicalHistoryPage from "./Components/Doctor/Pacients/MedicalHistoryPage";
+import MedicalHistoryPatientPage from "./Components/Pacient/MedicalHistoryPatientPage";
 import AdoptionForm from "./pages/Adoption/AdoptionForm";
 import "./App.css";
 
@@ -167,6 +168,16 @@ function App() {
               </>
             }
           />
+
+          <Route
+            path="/doctor/patients/:petId"
+            element={
+              <>
+                <DoctorNavbar />
+                <MedicalHistoryPage />
+              </>
+            }
+          />
           <Route
             path="/patient"
             element={
@@ -191,6 +202,15 @@ function App() {
               <>
                 <PatientNavbar />
                 <Services />
+              </>
+            }
+          />
+          <Route
+            path="/patient/services/:title"
+            element={
+              <>
+                <PatientNavbar />
+                <ServiceDetails />
               </>
             }
           />
@@ -222,7 +242,15 @@ function App() {
               </>
             }
           />
-
+          <Route
+            path="/patient/appointments"
+            element={
+              <>
+                <PatientNavbar />
+                <PacientAppointments />
+              </>
+            }
+          />
           <Route
             path="/patient/profile"
             element={
@@ -233,17 +261,25 @@ function App() {
             }
           />
           <Route
-            path="/patient/appointments"
+            path="/patient/profile/:petId"
             element={
               <>
                 <PatientNavbar />
-                <PacientAppointments />
+                <MedicalHistoryPatientPage />
               </>
             }
           />
 
-          <Route path="/patient/:petId" element={<MedicalHistoryPage />} />
-          <Route path="/" element={<PacientPage />} />
+          {/* <Route
+            path="/profile/:petId"
+            element={
+              <>
+                <PatientNavbar />
+                <MedicalHistoryPatientPage />
+              </>
+            }
+          /> */}
+
           <Route path="/form" element={<AdoptionForm />} />
         </Routes>
       </Router>

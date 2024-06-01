@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./ServiceCard.module.css";
 import { Link } from "react-router-dom";
 
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, isAuthenticated }) => {
   const [showMore] = useState(false);
 
   return (
@@ -16,7 +16,14 @@ const ServiceCard = ({ service }) => {
         <div className={styles.column}>
           <h2>{service.title}</h2>
           <p>{service.cardDescription}</p>
-          <Link to={`/services/${service.title}`} className={styles.button}>
+          <Link
+            to={
+              isAuthenticated
+                ? `/patient/services/${service.title}`
+                : `/services/${service.title}`
+            }
+            className={styles.button}
+          >
             More
           </Link>
           {showMore && (

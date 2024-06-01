@@ -35,19 +35,19 @@ const PatientNavbar = () => {
         <NavLink to="/patient" activeStyle end>
           Home
         </NavLink>
-        <NavLink to="/patient/team" activeStyle>
+        <NavLink to="/patient/team" activeStyle end>
           Team
         </NavLink>
-        <NavLink to="/patient/services" activeStyle>
+        <NavLink to="/patient/services" activeStyle end>
           Services
         </NavLink>
-        <NavLink to="/patient/review" activeStyle>
+        <NavLink to="/patient/review" activeStyle end>
           Review
         </NavLink>
-        <NavLink to="/patient/adoption" activeStyle>
+        <NavLink to="/patient/adoption" activeStyle end>
           Adoption
         </NavLink>
-        <NavLink to="/patient/info" activeStyle>
+        <NavLink to="/patient/info" activeStyle end>
           Contact
         </NavLink>
         <NavLink to="/patient/appointments">Appointments</NavLink>

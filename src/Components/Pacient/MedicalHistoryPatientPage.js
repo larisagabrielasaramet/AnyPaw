@@ -1,32 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
-import { FIREBASE_DB } from "../../../firebase/firebase";
-import DoctorNavbar from "../Homepage/NavBarDoc";
-import styles from "./MedicalHistoryPage.module.css";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { doc, getDoc } from "firebase/firestore";
+import { FIREBASE_DB } from "../../firebase/firebase";
+import PatientNavbar from "./PatientNavBar";
+import styles from "./MedicalHistoryPatientPage.module.css";
 
 function MedicalHistoryPage() {
   const { petId } = useParams();
   const [medicalHistory, setMedicalHistory] = useState([]);
   const [petData, setPetData] = useState({});
   const [userData, setUserData] = useState({});
-  const [newEntry, setNewEntry] = useState("");
-
-  const handleDeleteEntry = async (index) => {
-    const updatedHistory = medicalHistory.filter((_, i) => i !== index);
-    const petDoc = doc(FIREBASE_DB, "pet", petId);
-    await updateDoc(petDoc, {
-      entry: updatedHistory,
-    });
-    setMedicalHistory(updatedHistory);
-  };
-
-  const handleEditEntry = (index) => {
-    const entryToEdit = medicalHistory[index];
-    setNewEntry(entryToEdit);
-    handleDeleteEntry(index);
-  };
 
   useEffect(() => {
     const fetchMedicalHistory = async () => {
@@ -52,23 +35,9 @@ function MedicalHistoryPage() {
     fetchMedicalHistory();
   }, [petId]);
 
-  const handleNewEntryChange = (event) => {
-    setNewEntry(event.target.value);
-  };
-
-  const handleNewEntrySubmit = async (event) => {
-    event.preventDefault();
-    const petDoc = doc(FIREBASE_DB, "pet", petId);
-    await updateDoc(petDoc, {
-      entry: arrayUnion(newEntry),
-    });
-    setMedicalHistory((prev) => [...prev, newEntry]);
-    setNewEntry("");
-  };
-
   return (
     <div className={styles.container}>
-      <DoctorNavbar />
+      <PatientNavbar />
       <div className={styles.card}>
         <h1 className={styles.title}>{petData.name}</h1>
         <div className={styles.detailsContainer}>
@@ -103,39 +72,9 @@ function MedicalHistoryPage() {
         <h2 className={styles.subtitle}>Medical History:</h2>
         <ul className={styles.list}>
           {medicalHistory.map((entry, index) => (
-            <li key={index} className={styles.listItem}>
-              {entry}
-
-              <div className={styles.divider}>
-                <button
-                  onClick={() => handleEditEntry(index)}
-                  className={styles.button}
-                >
-                  <FaEdit />
-                </button>
-                <button
-                  onClick={() => handleDeleteEntry(index)}
-                  className={styles.button}
-                >
-                  <FaTrash />
-                </button>
-              </div>
-            </li>
+            <li key={index}>{entry}</li>
           ))}
         </ul>
-
-        <form onSubmit={handleNewEntrySubmit} className={styles.form}>
-          <input
-            type="text"
-            value={newEntry}
-            onChange={handleNewEntryChange}
-            placeholder="Add new medical entry"
-            className={styles.input}
-          />
-          <button type="submit" className={styles.button}>
-            Add
-          </button>
-        </form>
       </div>
     </div>
   );

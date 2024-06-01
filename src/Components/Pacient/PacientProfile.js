@@ -35,9 +35,8 @@ const PacientProfile = () => {
     }
   };
   const handleHistoryClick = (id) => {
-    navigate(`/patient/${id}`);
+    navigate(`/patient/profile/${id}`);
   };
-
   useEffect(() => {
     fetchPets();
   }, []);
