@@ -2,6 +2,7 @@
   height: 100vh;
   overflow: auto;
   scrollbar-width: none;
+  background-color: #f4f3f3;
 }
 .container::-webkit-scrollbar {
   display: none;
@@ -9,14 +10,14 @@
 
 .motto {
   position: relative;
-  margin-left: 200px;
+  margin-left: 250px;
   font-size: 24px;
   font-weight: bold;
-  margin-top: 160px;
+  margin-top: 140px;
   margin-bottom: 80px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-size: 2em;
-  color: #008080;
+  color: #0a5c5c;
   font-style: italic;
 }
 
@@ -24,7 +25,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  margin: 5px;
+  margin: 10px;
 }
 
 .adoption_cards_container::-webkit-scrollbar {
@@ -33,13 +34,14 @@
 
 .adopt_button {
   position: absolute;
-  margin-left: 900px;
-  margin-top: -100px;
-  width: 200px;
-  height: 80px;
-  border-radius: 18px;
-  border: #008080;
-  font-size: 0.7em;
+
+  margin-left: 850px;
+  margin-top: -85px;
+  width: 180px;
+  height: 60px;
+  border-radius: 22px;
+  border: none;
+  font-size: 0.6em;
   color: white;
-  background-color: #008080;
+  background-color: #0a5c5c;
 }
