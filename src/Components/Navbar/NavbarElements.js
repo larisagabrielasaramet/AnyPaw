@@ -3,7 +3,7 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  background: #0a5c5c; /* Dark Turquoise */
+  background: #0a5c5c;
   table-layout: fixed;
   height: 80px;
   display: flex;
@@ -37,7 +37,7 @@ export const NavLink = styled(Link)`
 export const Bars = styled(FaBars)`
   display: none;
   table-layout: fixed;
-  color: black; /* Alb */
+  color: black;
   @media screen and (max-width: 768px) {
     display: white;
     position: absolute;
@@ -74,7 +74,7 @@ export const NavBtnLink = styled(Link)`
   padding-top: 15px;
   border-radius: 24px;
   background: #0a5c5c;
-  border: 2px solid white; // setează lățimea la 2px și culoarea la alb
+  border: 2px solid white;
   text-align: center;
   font-size: 1.3rem;
   color: white;

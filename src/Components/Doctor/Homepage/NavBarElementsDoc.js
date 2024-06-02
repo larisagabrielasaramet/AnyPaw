@@ -3,7 +3,7 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  background: #008080; /* Dark Turquoise */
+  background: #0a5c5c; /* Dark Turquoise */
   table-layout: fixed;
   height: 80px;
   display: flex;
@@ -30,10 +30,9 @@ export const NavLink = styled(Link)`
   height: 100%;
   cursor: pointer;
   &.active {
-    color: #5f9ea0;
+    color: #40e0d0;
   }
 `;
-
 export const Bars = styled(FaBars)`
   display: none;
   table-layout: fixed;
@@ -60,38 +59,44 @@ export const NavMenu = styled.div`
 `;
 
 export const NavBtn = styled.nav`
-  background: #008080;
+  margin-top: 8px;
+  padding: 15px;
+  background: #0a5c5c;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   margin-left: auto;
-  margin-right: -100px;
+  margin-right: -130px;
 `;
 
 export const NavBtnLink = styled(Link)`
+  padding: 15px;
   border-radius: 24px;
-  padding: 5px;
-  background: #5F9EA0; 
-  padding: 10px 20px;
-  font-size: 1.3rem;
+  background: #0a5c5c;
+  border: 2px solid white; // setează lățimea la 2px și culoarea la alb
   text-align: center;
-  color: white; 
+  font-size: 1.2rem;
+  color: white;
   outline: none;
-  border: none;
   cursor: pointer;
-  height: 50px;
+  height: 28px;
   width: 60px;
- 
+  display: flex;
+  justify-content: center;
+  align-items: center; // aliniază textul la centru pe axa verticală
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   margin-left: 80px;
+  position: relative; // adăugat pentru a permite mutarea textului
+  top: -5px; // mută textul 5px mai sus
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: #006666; 
-    color: #5F9EA0; 
+    background: white;
+    color: #0a5c5c;
+  }
 `;
-
 export const LogoContainer = styled.div`
   display: flex;
   margin-left: 30px;
-  margin-right: 5px;
+  margin-right: 30px;
 `;
