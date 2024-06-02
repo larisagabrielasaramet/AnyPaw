@@ -3,7 +3,7 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  background: #0a5c5c; /* Dark Turquoise */
+  background: #0a5c5c;
   table-layout: fixed;
   height: 80px;
   display: flex;
@@ -73,7 +73,7 @@ export const NavBtnLink = styled(Link)`
   padding: 15px;
   border-radius: 24px;
   background: #0a5c5c;
-  border: 2px solid white; // setează lățimea la 2px și culoarea la alb
+  border: 2px solid white;
   text-align: center;
   font-size: 1.2rem;
   color: white;
@@ -83,11 +83,11 @@ export const NavBtnLink = styled(Link)`
   width: 60px;
   display: flex;
   justify-content: center;
-  align-items: center; // aliniază textul la centru pe axa verticală
+  align-items: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   margin-left: 80px;
-  position: relative; // adăugat pentru a permite mutarea textului
+  position: relative;
   top: -5px; // mută textul 5px mai sus
   &:hover {
     transition: all 0.2s ease-in-out;

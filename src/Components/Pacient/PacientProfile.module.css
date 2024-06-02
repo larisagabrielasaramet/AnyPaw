@@ -1,37 +1,46 @@
 .container {
-  margin-top: 40px;
+  margin-top: 50px;
   padding: 40px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 3fr));
-  gap: 40px;
-  grid-auto-rows: 1fr; /* Add this line */
+  gap: 35px;
+  grid-auto-rows: 1fr;
   padding: 60px;
+  height: 600px;
+  margin-left: 0px;
+  overflow: auto;
+  background-color: #808080;
+}
+.container::-webkit-scrollbar {
+  display: none;
 }
 
 .patient_card {
-  margin: 20px;
+  margin-top: 20px;
+  margin-left: 40px;
   border: 1px solid #ccc;
-  border-radius: 12px;
-  box-shadow: 0px 0px 0px 2px #006666;
+  border-radius: 22px;
+  box-shadow: 0px 8px 8px 2px #0a5c5c;
   padding: 10px;
   width: 350px;
-  background-color: #f9f9f9;
+  height: 300px;
+  background-color: #f4f3f3;
   display: flex;
   flex-direction: column;
 }
 
 .patient_card h2 {
   text-align: center;
-  margin: 5px 10px 30px;
-
+  margin: 15px 10px 30px;
   font-style: italic;
-  font-size: 2.5em;
-  color: #006666;
+  font-size: 2.2em;
+  color: #0a5c5c;
+  text-decoration: underline;
 }
 
 .patient_card p {
   margin-left: 20px;
-  font-size: 1.3em;
+  font-size: 1.2em;
   margin: 10px 30px 10px;
 }
 
@@ -39,15 +48,15 @@
   align-self: center;
   margin: 40px 80px 10px;
   padding: 10px 10px;
-  font-size: 16px;
-  background-color: #008080;
+  font-size: 17px;
+  background-color: #006666;
   color: #fff;
-  height: 60px;
+  height: 50px;
   border: none;
   border-radius: 24px;
   cursor: pointer;
 }
 
 .patient_card button:hover {
-  background-color: #006666;
+  background-color: #808080;
 }

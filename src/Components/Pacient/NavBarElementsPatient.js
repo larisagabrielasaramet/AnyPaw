@@ -3,8 +3,8 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  background: #008080; /* Dark Turquoise */
-
+  background: #0a5c5c;
+  table-layout: fixed;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -30,13 +30,14 @@ export const NavLink = styled(Link)`
   height: 100%;
   cursor: pointer;
   &.active {
-    color: #5f9ea0;
+    color: #40e0d0;
   }
 `;
 
 export const Bars = styled(FaBars)`
   display: none;
-  color: black; /* Alb */
+  table-layout: fixed;
+  color: black;
   @media screen and (max-width: 768px) {
     display: white;
     position: absolute;
@@ -59,39 +60,43 @@ export const NavMenu = styled.div`
 `;
 
 export const NavBtn = styled.nav`
-  background: #008080;
+  padding: 15px;
+  background: #0a5c5c;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   margin-left: auto;
-  margin-right: -180px;
+  margin-right: -90px;
 `;
 
 export const NavBtnLink = styled(Link)`
-border-radius: 24px;
-  padding: 5px;
-  background: #5F9EA0; 
-  padding: 10px 20px;
-  font-size: 1.3rem;
+  padding: 15px;
+  padding-top: 15px;
+  border-radius: 24px;
+  background: #0a5c5c;
+  border: 2px solid white;
   text-align: center;
-  color: white; 
+  font-size: 1.3rem;
+  color: white;
   outline: none;
-  border: none;
   cursor: pointer;
-  height: 50px;
+  height: 28px;
   width: 60px;
- 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  margin-left: 80px;
+  margin-left: -70px;
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: #006666; 
-    color: #5f9ea0; 
+    background: white;
+    color: #0a5c5c;
+  }
 `;
 
 export const LogoContainer = styled.div`
   display: flex;
-  align-items: center;
-  margin-left: 30px;
-  margin-right: auto;
+  margin-left: 10px;
+  margin-right: 30px;
 `;
