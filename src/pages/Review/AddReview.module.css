@@ -1,31 +1,31 @@
 .AddReview {
   position: fixed;
-  top: 80px;
+  top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  border: 1px solid #ffd700;
-
+  padding: 15px;
+  box-shadow: 0 6px 10px 6px #808080;
   border-radius: 36px;
-  width: 390px;
-  height: 83%;
+  width: 360px;
+  height: 80%;
   margin-left: -40px;
-  background-color: #f7f7f7;
+  background-color: #f4f3f3;
 }
 .AddReview h2 {
-  margin-top: 0px;
-  margin-bottom: 60px;
-  font-size: 2.5em;
-  color: #ffd700;
+  margin-top: -20px;
+  margin-bottom: 50px;
+  font-size: 2.8em;
+  color: #0a5c5c;
+  font-weight: bold;
 }
 
 .input {
-  width: 100%;
-  padding: 20px;
+  width: 90%;
+  padding: 15px;
   margin-bottom: 40px;
-  border: 1px solid #ffd700;
+  border: none;
   border-radius: 36px;
 }
 
@@ -33,21 +33,22 @@
   width: 80%;
   display: flex;
   justify-content: center;
-  border-color: #ffd700;
+  border-color: #c7ad1c;
 }
 .button {
   width: 30%;
   height: 50px;
   padding: 10px 20px;
   border: none;
-  background-color: #ffd700;
+  background-color: #0a5c5c;
   margin-top: 30px;
   color: #fff;
   font-size: 1.2em;
   cursor: pointer;
   border-radius: 24px;
+  margin-left: 10px;
 }
 
 .button:hover {
-  background-color: #c7ad1c;
+  background-color: #6faaaa;
 }

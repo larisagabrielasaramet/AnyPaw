@@ -1,13 +1,14 @@
 .card {
-  width: 240px;
+  width: 200px;
   height: 150px;
-  background-color: #f7f7f7;
-  border: 1px solid #ffd700;
+  background-color: #f4f3f3;
+  margin-left: 5px;
   border-radius: 16px;
   padding: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 4px 4px #808080;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   margin-bottom: 15px;
 }
 
