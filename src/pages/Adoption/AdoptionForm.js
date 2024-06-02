@@ -10,12 +10,14 @@ import {
 import { FIREBASE_DB } from "../../firebase/firebase";
 import { getAuth } from "firebase/auth";
 import styles from "./AdoptionForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 const AdoptionForm = () => {
   const { register, handleSubmit, reset } = useForm();
   const auth = getAuth();
   const [images, setImages] = useState([]);
   const [imageUrl, setCardImage] = useState("");
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     const newData = {
@@ -31,6 +33,7 @@ const AdoptionForm = () => {
       reset();
       setImages([]);
       setCardImage("");
+      navigate("/patient/adoption");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -45,9 +48,7 @@ const AdoptionForm = () => {
 
     uploadTask.on(
       "state_changed",
-      (snapshot) => {
-        // Handle progress
-      },
+      (snapshot) => {},
       (error) => {
         console.log(error);
       },

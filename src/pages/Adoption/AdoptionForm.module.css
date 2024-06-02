@@ -2,13 +2,12 @@
   display: flex;
   margin-top: 90px;
   margin-left: 55px;
-  height: 86vh;
+  height: 80vh;
   width: 100%;
   background-image: url("../../../public/alt.jpg");
   background-size: contain;
-  justify-content: space-between; /* Acest lucru va adăuga spațiu între formular și imagine */
-  /* Acest lucru va face ca imaginea să se potrivească cu dimensiunea containerului */
-  background-repeat: no-repeat; /* Acest lucru va preveni repetarea imaginii */
+  justify-content: space-between;
+  background-repeat: no-repeat;
   background-position: right;
 }
 .adoption_form {
@@ -21,10 +20,13 @@
   box-shadow: 0px 8px 6px 8px #7f817f;
   border-radius: 16px;
   margin-left: 100px;
+  height: 655px;
+  overflow-y: auto;
 }
 .adoption_form h3 {
+  margin-top: 8px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #006666;
   font-size: 1.5em;
 }
@@ -32,7 +34,7 @@
   align-self: center;
   margin-bottom: 10px;
   width: 80%;
-  padding: 15px;
+  padding: 9px;
   border: 1px solid #ccc;
   border-radius: 16px;
 }
@@ -40,8 +42,8 @@
 .adoption_form input[type="submit"] {
   margin-top: 10px;
   background-color: #006666;
-  width: 150px;
-  font-size: 1.2em;
+  width: 90px;
+  font-size: 1em;
   color: white;
   cursor: pointer;
 }
