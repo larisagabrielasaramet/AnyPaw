@@ -1,6 +1,6 @@
 .container {
   flex: 0 0 30%;
-  margin: 25px;
+  margin: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -9,12 +9,12 @@
 
 .card {
   margin: 30px;
-  background-color: #5f9ea0;
-  box-shadow: 0 4px 16px #006666;
+  background-color: #a7d7c5;
+  box-shadow: 0 6px 6px 2px #808080;
   padding: 30px;
-  border-radius: 24px;
+  border-radius: 28px;
   height: 300px;
-  width: 300px;
+  width: 350px;
 }
 
 .column h2 {
@@ -62,14 +62,14 @@
   cursor: pointer;
   transition-duration: 0.4s;
   background-color: #f8f9fa;
-  color: #006666;
-  box-shadow: 0 4px 8px 0 #006666;
+  color: #808080;
+  box-shadow: 0 4px 8px 0;
 }
 
 .button:hover {
-  background-color: #006666;
+  background-color: #808080;
   color: white;
-  box-shadow: 0 4px 8px 0 #006666;
+  box-shadow: 0 4px 8px 0;
 }
 
 .servicesList {

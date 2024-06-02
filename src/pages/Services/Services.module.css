@@ -1,12 +1,13 @@
 .servicesContainer {
-  margin-top: 50px;
+  margin-top: 80px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  height: 95vh;
+  height: 90vh;
   overflow: auto;
   scrollbar-width: none;
   margin-bottom: 50px;
+  background-color: #f4f3f3;
 }
 
 .servicesContainer::-webkit-scrollbar {
