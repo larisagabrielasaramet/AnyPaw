@@ -1,9 +1,9 @@
 .container {
   display: flex;
   justify-content: space-between;
-  margin-top: 90px;
+  margin-top: 75px;
   padding: 20px;
-  height: 80vh;
+  height: 86vh;
 }
 .schedule {
   background-image: url("/public/cat.png");
@@ -16,9 +16,9 @@
   flex: 1;
   padding: 20px;
   background-color: #5f9ea0;
-  border: 2px solid #008080;
+  border: none;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px #808080;
   margin: 10px;
   box-sizing: border-box;
 }
@@ -53,7 +53,7 @@
   margin-right: 15px;
   margin-top: 15px;
   align-self: center;
-  max-width: 40px;
+  max-width: 35px;
   max-height: 30px;
 }
 
@@ -68,9 +68,10 @@
 
 .social_icon {
   margin-top: 40px;
-  padding-left: 25px;
+  padding-left: 20px;
+  margin-left: -3px;
   color: white;
-  width: 30px;
+  width: 20px;
   height: 20px;
 }
 
