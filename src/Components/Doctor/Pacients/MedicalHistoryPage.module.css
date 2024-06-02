@@ -1,35 +1,36 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Add this line */
+  justify-content: center;
   align-items: center;
   padding: 20px;
-  min-height: 100vh; /* Change this line */
+  background-color: #808080;
 }
 
 .card {
   align-items: center;
   width: 800px;
-  margin-top: 45px;
+  height: 600px;
+  margin-top: 85px;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 12px 18px #006666;
+  border-radius: 22px;
+  box-shadow: 0 12px 16px #006666;
   padding: 40px;
-
   overflow-y: auto;
-  max-height: 78vh;
+  max-height: 72vh;
 }
 
 .card::-webkit-scrollbar {
-  display: none; /* ascunde scrollbar-ul */
+  display: none;
 }
 .title {
-  font-size: 24px;
+  text-decoration: underline;
+  margin-top: 5px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: center;
   font-size: 2.5em;
-  color: #006666;
+  color: #0a5c5c;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-style: italic;
@@ -41,16 +42,16 @@
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: 20px;
   font-weight: bold;
-  margin-left: 20px;
-  margin-top: 30px;
+  margin-left: 40px;
+
   font-style: italic;
   text-decoration: underline;
 }
 
 .details {
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 10px;
-  margin-left: 30px;
+  margin-left: 40px;
 }
 
 .form {
@@ -69,9 +70,9 @@
 
 .button {
   padding: 10px 20px;
-  border-radius: 12px;
+  border-radius: 32px;
   border: none;
-  background-color: #008080;
+  background-color: #0a5c5c;
   color: #fff;
   cursor: pointer;
 }
@@ -101,5 +102,5 @@
 
 .petDetails,
 .ownerDetails {
-  width: 45%; /* Adjust this value as needed */
+  width: 30%;
 }
