@@ -17,7 +17,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const useHasAppointment = (appointments, week) => {
   return useMemo(() => {
@@ -326,7 +326,9 @@ function AppointmentPage() {
                       <button
                         className={styles.addAppointmentButton}
                         onClick={() => handleAddAppointment(index, hour)}
-                      ></button>
+                      >
+                        <FontAwesomeIcon icon={faPlus} />
+                      </button>
                     )}
                   </td>
                 );
@@ -406,13 +408,13 @@ function AppointmentPage() {
             </p>
           </div>
 
-          <div>
+          {/* <div>
             {selectedAppointment && selectedAppointment.date
               ? moment(selectedAppointment.date).format(
                   "MMMM Do YYYY, h:mm:ss a"
                 )
               : "No appointment selected"}
-          </div>
+          </div> */}
         </div>
       )}
 
