@@ -3,7 +3,7 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  background: #008080; /* Dark Turquoise */
+  background: #0a5c5c; /* Dark Turquoise */
   table-layout: fixed;
   height: 80px;
   display: flex;
@@ -30,7 +30,7 @@ export const NavLink = styled(Link)`
   height: 100%;
   cursor: pointer;
   &.active {
-    color: #5f9ea0;
+    color: #40e0d0;
   }
 `;
 
@@ -60,34 +60,38 @@ export const NavMenu = styled.div`
 `;
 
 export const NavBtn = styled.nav`
-  background: #008080;
+  padding: 15px;
+  background: #0a5c5c;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   margin-left: auto;
-  margin-right: -180px;
+  margin-right: -130px;
 `;
 
 export const NavBtnLink = styled(Link)`
+  padding: 15px;
+  padding-top: 15px;
   border-radius: 24px;
-  background: #5f9ea0;
-  padding: 10px 20px;
+  background: #0a5c5c;
+  border: 2px solid white; // setează lățimea la 2px și culoarea la alb
+  text-align: center;
   font-size: 1.3rem;
   color: white;
   outline: none;
-  border: none;
   cursor: pointer;
-  height: 40px;
+  height: 28px;
   width: 60px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   margin-left: 80px;
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: #006666;
-    color: #5f9ea0;
+    background: white;
+    color: #0a5c5c;
   }
 `;
 
