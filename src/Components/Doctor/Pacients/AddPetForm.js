@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./AddPetForm.module.css";
-import { useNavigate } from "react-router-dom"; // importați useNavigate
+import { useNavigate } from "react-router-dom";
+import { FiX } from "react-icons/fi";
 
 function AddPetForm({ onAddPet }) {
   const [name, setName] = useState("");
@@ -10,6 +11,7 @@ function AddPetForm({ onAddPet }) {
   const [weight, setWeight] = useState("");
   const [userId, setUserId] = useState("");
   const [entry, setEntry] = useState([]);
+  const [isOpen, setIsOpen] = useState(true);
 
   const navigate = useNavigate();
   const handleEntryChange = (e) => {
@@ -17,7 +19,13 @@ function AddPetForm({ onAddPet }) {
     newEntry.unshift(e.target.value);
     setEntry(newEntry);
   };
+  const handleClose = () => {
+    setIsOpen(false); // setează isOpen la false atunci când butonul este apăsat
+  };
 
+  if (!isOpen) {
+    return null; // dacă formularul este închis, nu returnați nimic
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -35,6 +43,9 @@ function AddPetForm({ onAddPet }) {
   return (
     <div className={styles.overlay}>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <button onClick={handleClose} className={styles.closeButton}>
+          x
+        </button>
         <h2>Add new pet</h2>
         <label className={styles.label}>
           <input

@@ -4,26 +4,28 @@
   align-items: center;
   flex-direction: column;
   content: fixed;
+  margin-top: -20px;
+  background-color: #f4f3f3;
 }
 .AppointmentPage {
-  background-color: azure;
   margin-top: 150px;
-  width: 93%;
+  width: 90%;
   border-collapse: separate;
-  border-spacing: 1px;
-  font-size: 1.2em;
+  border-spacing: 0.8px;
+  font-size: 1em;
   table-layout: fixed;
 }
 
 .AppointmentPage th,
 .AppointmentPage td {
-  border: 1px solid #181616;
-
-  padding: 20px;
+  border: 0.5px solid #0a5c5c;
+  border-radius: 12px;
+  padding: 15px;
   text-align: center;
-  color: #008080;
+  color: #0a5c5c;
   font-family: Roboto, sans-serif;
   font-style: bold;
+  background-color: azure;
 }
 
 .appointment {
@@ -36,20 +38,21 @@
   background-color: transparent;
   cursor: pointer;
   padding: 10px;
-  font-size: 4em;
+  font-size: 4.5em;
   padding: 5px;
+  margin-top: -20px;
 }
 
 .nextButton::after {
   content: "➡";
-  margin-right: 50px;
-  color: #008080;
+  margin-right: 70px;
+  color: #0a5c5c;
 }
 
 .prevButton::before {
   content: "⬅";
-  margin-left: 60px;
-  color: #008080;
+  margin-left: 70px;
+  color: #0a5c5c;
 }
 
 .navigation {
@@ -58,14 +61,122 @@
   width: 100%;
 }
 
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup_inner {
+  position: relative;
+  background-color: #f4f3f3;
+  padding: 20px;
+  margin-left: 40px;
+  border-radius: 18px;
+  max-width: 500px;
+  width: 80%;
+}
+
 .appointmentButton {
   background-color: rgb(253, 47, 47);
   color: white;
   border: none;
+  width: 100px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1em;
+}
+.addAppointmentButton {
+  background-color: #0a5c5c;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 18px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 1em;
 }
 
-.noDoctors {
-  background-color: red;
+.popup_app {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: #808080;
+}
+
+.popup_inner_app {
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 16px;
+  max-width: 210px;
+  width: 80%;
+  border: 2px solid #808080;
+  background-color: #f4f3f3;
+}
+
+.submitButton {
+  background-color: #006666;
+  color: white;
+  border: none;
+  margin-top: 20px;
+  border-radius: 12px;
+  width: 80px;
+  height: 35px;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.inputField {
+  margin-top: 40px;
+  border: 1px solid #006666;
+  border-radius: 12px;
+  width: 200px;
+  height: 25px;
+  padding: 5px;
+}
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background-color: #006666;
+
+  border: none;
+  border-radius: 8px;
+  color: white;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 10px;
+  right: 40px;
+  cursor: pointer;
+  background-color: #006666;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  margin-top: 5px;
+  margin-right: 12px;
 }
