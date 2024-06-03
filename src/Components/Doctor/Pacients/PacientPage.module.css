@@ -16,7 +16,7 @@
 }
 
 .patient_card {
-  margin-top: 20px;
+  margin-top: 100px;
   margin-left: 40px;
   border: 1px solid #ccc;
   border-radius: 22px;
@@ -25,6 +25,7 @@
   width: 350px;
   background-color: #f4f3f3;
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
@@ -41,6 +42,7 @@
   margin-left: 20px;
   font-size: 1.2em;
   margin: 10px 30px 10px;
+  transition: background-color 0.3s ease;
 }
 
 .patient_card button {
@@ -56,6 +58,35 @@
   cursor: pointer;
 }
 
+.patient_card:hover {
+  background-color: #f5f5f5;
+}
 .patient_card button:hover {
   background-color: #808080;
+}
+
+.addPetButton {
+  margin-top: 85px;
+  margin-bottom: 10px;
+  margin-left: 1080px;
+  padding: 10px 10px;
+  font-size: 18px;
+  background-color: #006666;
+  color: #fff;
+  height: 50px;
+  border: none;
+  width: 250px;
+  border-radius: 24px;
+  cursor: pointer;
+  z-index: 2;
+}
+.emptyElement {
+  grid-column: span 3;
+  margin-top: 0px;
+  margin-left: 50px;
+}
+
+.containerSerach {
+  margin-top: -120px;
+  margin-bottom: 50px;
 }

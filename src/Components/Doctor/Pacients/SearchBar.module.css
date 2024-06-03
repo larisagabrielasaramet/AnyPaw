@@ -1,0 +1,50 @@
+.SearchBar {
+  position: relative;
+  width: 200px;
+  border: none;
+}
+
+.SearchBar .inputWrapper {
+  position: relative;
+}
+
+.SearchBar input {
+  width: 100%;
+  padding: 10px;
+  padding-left: 30px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 22px;
+}
+
+.SearchBar .searchIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.SearchBar .dropdown {
+  margin-top: 2px;
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 22px;
+  z-index: 1;
+}
+
+.SearchBar .dropdown div {
+  margin-top: 2px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 22px;
+}
+
+.SearchBar .dropdown div:hover {
+  background-color: #f1f1f1;
+  border: none;
+}
+
+.SearchBar input:focus {
+  outline: none;
+}

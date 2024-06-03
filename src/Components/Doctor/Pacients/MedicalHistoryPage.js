@@ -34,7 +34,13 @@ function MedicalHistoryPage() {
       const petDocSnapshot = await getDoc(petDoc);
       if (petDocSnapshot.exists()) {
         const petData = petDocSnapshot.data();
-        setMedicalHistory(petData.entry);
+        // Verificați dacă petData.entry este un array înainte de a-l seta ca medicalHistory
+        if (Array.isArray(petData.entry)) {
+          setMedicalHistory(petData.entry);
+        } else {
+          // Convertiți petData.entry într-un array dacă nu este deja unul
+          setMedicalHistory([petData.entry]);
+        }
         setPetData(petData);
         const userDoc = doc(FIREBASE_DB, "user", petData.userId);
         const userDocSnapshot = await getDoc(userDoc);
