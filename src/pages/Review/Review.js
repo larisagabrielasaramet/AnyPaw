@@ -27,7 +27,8 @@ const Review = () => {
             date: data.createdAt ? data.createdAt.toDate() : null, // check if createdAt exists before calling toDate()
           };
         })
-        .filter((review) => review.isPosted);
+        .filter((review) => review.isPosted)
+        .sort((a, b) => a.createdAt.seconds - b.createdAt.seconds);
       setReviews(newReviews);
     });
 
