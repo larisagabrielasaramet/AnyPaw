@@ -24,22 +24,26 @@ const Adoption = () => {
     const fetchAdoptions = async () => {
       const adoptionsCollection = collection(FIREBASE_DB, "adoption");
       const adoptionsSnapshot = await getDocs(adoptionsCollection);
-      const adoptionsList = await Promise.all(
+      let adoptionsList = await Promise.all(
         adoptionsSnapshot.docs.map(async (adoptionDoc) => {
           const adoption = adoptionDoc.data();
-          console.log("adoption:", adoption);
           let userName = "";
           if (adoption.userId) {
             const userSnapshot = await getDoc(
               doc(FIREBASE_DB, "user", adoption.userId)
             );
             const user = userSnapshot.data();
-            console.log("user:", user);
             userName = user ? user.fullname : "";
           }
           return { ...adoption, userName };
         })
       );
+      adoptionsList = adoptionsList.sort((a, b) => {
+        if (!b.createdAt || !a.createdAt) {
+          return -1;
+        }
+        return b.createdAt.seconds - a.createdAt.seconds;
+      }); // sort adoptions by createdAt in descending order
       setAdoptions(adoptionsList);
     };
 

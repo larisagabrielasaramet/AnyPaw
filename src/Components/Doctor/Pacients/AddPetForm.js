@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./AddPetForm.module.css";
 import { useNavigate } from "react-router-dom";
-import { FiX } from "react-icons/fi";
 
 function AddPetForm({ onAddPet }) {
   const [name, setName] = useState("");

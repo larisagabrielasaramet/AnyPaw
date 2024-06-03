@@ -69,7 +69,7 @@ function MedicalHistoryPage() {
             </p>
           </div>
         </div>
-        <h2 className={styles.subtitle}>Medical History:</h2>
+        <h2 className={styles.subtitleHistory}>Medical History:</h2>
         <ul className={styles.list}>
           {Array.isArray(medicalHistory) ? (
             medicalHistory.map((entry) => <li>{entry}</li>)

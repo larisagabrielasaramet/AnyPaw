@@ -42,8 +42,18 @@
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: 20px;
   font-weight: bold;
-  margin-left: 40px;
+  margin-left: 120px;
 
+  font-style: italic;
+  text-decoration: underline;
+}
+.subtitleHistory {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
   font-style: italic;
   text-decoration: underline;
 }
@@ -51,7 +61,7 @@
 .details {
   font-size: 16px;
   margin-bottom: 10px;
-  margin-left: 40px;
+  margin-left: 120px;
 }
 
 .form {
@@ -78,8 +88,10 @@
 }
 
 .list {
-  list-style-type: none;
+  list-style-type: disc;
+
   padding: 0;
+  margin-left: 25px;
 }
 
 .listItem {
@@ -92,7 +104,7 @@
 
 .divider {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 
 .detailsContainer {
@@ -102,5 +114,5 @@
 
 .petDetails,
 .ownerDetails {
-  width: 30%;
+  width: 50%;
 }
