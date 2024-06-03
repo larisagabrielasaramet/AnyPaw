@@ -12,6 +12,11 @@ function AddPetForm({ onAddPet }) {
   const [entry, setEntry] = useState([]);
 
   const navigate = useNavigate();
+  const handleEntryChange = (e) => {
+    const newEntry = [...entry];
+    newEntry.unshift(e.target.value);
+    setEntry(newEntry);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -94,9 +99,9 @@ function AddPetForm({ onAddPet }) {
         <label className={styles.label}>
           <input
             placeholder="First entry"
-            type="array"
-            value={entry}
-            onChange={(e) => setEntry(e.target.value)}
+            type="text" // schimbați "array" în "text"
+            value={entry[0] || ""} // afișează primul element al array-ului sau un string gol
+            onChange={handleEntryChange} // folosiți noua funcție de manipulare
             required
             className={styles.input}
           />

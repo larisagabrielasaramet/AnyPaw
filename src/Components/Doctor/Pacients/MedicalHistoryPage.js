@@ -11,7 +11,7 @@ function MedicalHistoryPage() {
   const [medicalHistory, setMedicalHistory] = useState([]);
   const [petData, setPetData] = useState({});
   const [userData, setUserData] = useState({});
-  const [newEntry, setNewEntry] = useState("");
+  const [newEntry, setNewEntry] = useState([]);
 
   const handleDeleteEntry = async (index) => {
     const updatedHistory = medicalHistory.filter((_, i) => i !== index);
@@ -108,26 +108,27 @@ function MedicalHistoryPage() {
         </div>
         <h2 className={styles.subtitle}>Medical History:</h2>
         <ul className={styles.list}>
-          {medicalHistory.map((entry, index) => (
-            <li key={index} className={styles.listItem}>
-              {entry}
-
-              <div className={styles.divider}>
-                <button
-                  onClick={() => handleEditEntry(index)}
-                  className={styles.button}
-                >
-                  <FaEdit />
-                </button>
-                <button
-                  onClick={() => handleDeleteEntry(index)}
-                  className={styles.button}
-                >
-                  <FaTrash />
-                </button>
-              </div>
-            </li>
-          ))}
+          {medicalHistory
+            ? medicalHistory.map((entry, index) => (
+                <li key={index} className={styles.listItem}>
+                  {entry}
+                  <div className={styles.divider}>
+                    <button
+                      onClick={() => handleEditEntry(index)}
+                      className={styles.button}
+                    >
+                      <FaEdit />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteEntry(index)}
+                      className={styles.button}
+                    >
+                      <FaTrash />
+                    </button>
+                  </div>
+                </li>
+              ))
+            : null}
         </ul>
 
         <form onSubmit={handleNewEntrySubmit} className={styles.form}>

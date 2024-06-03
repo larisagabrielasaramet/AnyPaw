@@ -71,9 +71,11 @@ function MedicalHistoryPage() {
         </div>
         <h2 className={styles.subtitle}>Medical History:</h2>
         <ul className={styles.list}>
-          {medicalHistory.map((entry, index) => (
-            <li key={index}>{entry}</li>
-          ))}
+          {Array.isArray(medicalHistory) ? (
+            medicalHistory.map((entry) => <li>{entry}</li>)
+          ) : (
+            <p></p>
+          )}
         </ul>
       </div>
     </div>
