@@ -18,6 +18,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 const useHasAppointment = (appointments, week) => {
   return useMemo(() => {
@@ -64,6 +65,8 @@ function AppointmentPage() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [appointmentDate, setAppointmentDate] = useState(null);
+  const functions = getFunctions();
+  const createCalendarEvent = httpsCallable(functions, "createCalendarEvent");
 
   React.useEffect(() => {
     if (petId) {
@@ -246,7 +249,7 @@ function AppointmentPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("petId:", petIdState);
+
     if (!petIdState) {
       console.error("Pet ID is not defined!");
       return;
@@ -267,6 +270,18 @@ function AppointmentPage() {
         newAppointment
       );
       console.log("Document written with ID: ", docRef.id);
+
+      try {
+        const result = await createCalendarEvent({
+          startDateTime: appointmentDate.format(),
+          endDateTime: appointmentDate.add(1, "hours").format(),
+          email: "User Email", // Replace with the user's email
+        });
+        console.log("Calendar event created:", result.data);
+      } catch (error) {
+        console.error("Error creating calendar event:", error);
+      }
+
       handleClose();
       fetchAppointments();
     } catch (e) {
