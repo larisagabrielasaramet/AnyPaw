@@ -14,21 +14,27 @@ function AppointmentPage() {
   const hours = Array.from({ length: 9 }, (_, i) => i + 9);
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
   const [availability, setAvailability] = useState({});
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   moment.locale("en", {
     week: {
       dow: 1,
     },
   });
+
   const handleSelectDoctor = async (day, hour, event) => {
     const doctorId = event.target.value;
     const auth = getAuth();
     const userId = auth.currentUser ? auth.currentUser.uid : null;
-
+    const selectedDateString = `${selectedDate.getFullYear()}-${
+      selectedDate.getMonth() + 1
+    }-${selectedDate.getDate()}`;
     const newAppointment = {
       doctorId,
       userId,
-      timestamp: Timestamp.fromDate(new Date(`2024-05-30T${hour}:00:00+03:00`)),
+      timestamp: Timestamp.fromDate(
+        new Date(`${selectedDateString}T${hour}:00:00+03:00`)
+      ),
     };
 
     try {
@@ -52,11 +58,13 @@ function AppointmentPage() {
   const handleNext = () => {
     const newDate = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
     setCurrentDate(newDate);
+    setSelectedDate(getFirstDayOfWeek(newDate)); // set selectedDate to the first day of the week displayed in the calendar
   };
 
   const handlePrev = () => {
     const newDate = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000);
     setCurrentDate(newDate);
+    setSelectedDate(getFirstDayOfWeek(newDate)); // set selectedDate to the first day of the week displayed in the calendar
   };
   const getFirstDayOfWeek = () => {
     const now = new Date();
@@ -142,6 +150,8 @@ function AppointmentPage() {
                     hour={hour}
                     doctors={doctors}
                     appointments={appointments}
+                    selectedDate={selectedDate}
+                    currentDate={currentDate}
                   />
                 );
               })}
