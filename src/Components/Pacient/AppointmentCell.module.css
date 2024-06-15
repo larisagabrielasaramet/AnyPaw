@@ -49,3 +49,7 @@
   color: white;
   border-radius: 20px;
 }
+
+.bookedCell {
+  background-color: red;
+}

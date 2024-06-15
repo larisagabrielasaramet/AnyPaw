@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FIREBASE_DB, FIREBASE_AUTH } from "../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import styles from "./DoctorProfile.module.css";
+import personalInfo from "./personalInfo.svg";
+import docInfo from "./docInfo.svg";
 
 const DoctorProfile = () => {
   const [doctorData, setDoctorData] = useState(null);
@@ -41,6 +43,11 @@ const DoctorProfile = () => {
   return (
     <div className={styles.container}>
       <div className={styles.profileCard}>
+        <img
+          src={personalInfo}
+          alt="Persona Info"
+          className={styles.personalInfo}
+        />
         <h1> {doctorData?.fullName}</h1>
         <p>
           <strong>Email:</strong> {doctorData?.email}
@@ -51,6 +58,7 @@ const DoctorProfile = () => {
         <p>
           <strong>Address:</strong> {doctorData?.address}
         </p>
+        <img src={docInfo} alt="Doc Info" className={styles.docInfo} />
       </div>
     </div>
   );

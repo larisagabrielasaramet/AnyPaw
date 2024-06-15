@@ -16,6 +16,11 @@
   height: 300px;
   width: 350px;
 }
+.card:hover {
+  transform: scale(1.05); /* Mărește cardul cu 5% */
+  transition: transform 0.3s ease-in-out; /* Animă transformarea pe o perioadă de 0.3 secunde */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); /* Adaugă o umbră mai mare */
+}
 
 .column h2 {
   font-size: 20px;

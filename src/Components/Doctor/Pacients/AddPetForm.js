@@ -11,20 +11,21 @@ function AddPetForm({ onAddPet }) {
   const [userId, setUserId] = useState("");
   const [entry, setEntry] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
-
   const navigate = useNavigate();
+
   const handleEntryChange = (e) => {
     const newEntry = [...entry];
     newEntry.unshift(e.target.value);
     setEntry(newEntry);
   };
   const handleClose = () => {
-    setIsOpen(false); // setează isOpen la false atunci când butonul este apăsat
+    setIsOpen(false);
   };
 
   if (!isOpen) {
-    return null; // dacă formularul este închis, nu returnați nimic
+    return null;
   }
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -109,9 +110,9 @@ function AddPetForm({ onAddPet }) {
         <label className={styles.label}>
           <input
             placeholder="First entry"
-            type="text" // schimbați "array" în "text"
-            value={entry[0] || ""} // afișează primul element al array-ului sau un string gol
-            onChange={handleEntryChange} // folosiți noua funcție de manipulare
+            type="text"
+            value={entry[0] || ""}
+            onChange={handleEntryChange}
             required
             className={styles.input}
           />

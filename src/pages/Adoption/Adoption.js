@@ -16,7 +16,6 @@ const Adoption = () => {
       setCurrentUser(user);
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
@@ -43,7 +42,7 @@ const Adoption = () => {
           return -1;
         }
         return b.createdAt.seconds - a.createdAt.seconds;
-      }); // sort adoptions by createdAt in descending order
+      });
       setAdoptions(adoptionsList);
     };
 

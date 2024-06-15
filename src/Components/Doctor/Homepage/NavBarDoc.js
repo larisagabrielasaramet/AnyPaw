@@ -33,7 +33,7 @@ const DoctorNavbar = () => {
       <Bars />
       <NavMenu>
         <NavLink to="/doctor" end>
-          Homepage
+          Home
         </NavLink>
         <NavLink to="/doctor/profile">My Profile</NavLink>
         <NavLink to="/doctor/appointments">Appointments</NavLink>

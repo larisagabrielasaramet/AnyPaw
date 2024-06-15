@@ -80,7 +80,7 @@ const AdoptionDetails = () => {
           contentLabel="Image Modal"
           style={{
             overlay: {
-              backgroundColor: "rgba(0, 0, 0, 0.75)", // This will make the background darker
+              backgroundColor: "rgba(0, 0, 0, 0.75)",
             },
             content: {
               top: "50%",

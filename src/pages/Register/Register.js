@@ -15,6 +15,7 @@ import {
 } from "react-icons/fi";
 import styles from "./Register.module.css";
 import Swal from "sweetalert2";
+import iconRegister from "./iconRegister.svg";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -123,6 +124,12 @@ const Register = () => {
 
   return (
     <div className={styles.form_container}>
+      <img
+        src={iconRegister}
+        alt="Register Icon"
+        className={styles.register_icon}
+      />
+
       <h2 className={styles.form_title}>Register</h2>
       <div className={styles.input_field}>
         <div className={styles.input_icon_wrapper}>

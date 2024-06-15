@@ -3,6 +3,7 @@ import { collection, getDocs, query, where } from "@firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { FIREBASE_DB, FIREBASE_AUTH } from "../../firebase/firebase";
 import styles from "./PacientProfile.module.css";
+import catic from "./catic.svg";
 
 const PacientProfile = () => {
   const [pets, setPets] = useState([]);
@@ -42,6 +43,7 @@ const PacientProfile = () => {
   }, []);
   return (
     <div className={styles.container}>
+      <img src={catic} alt="catic" className={styles.catic} />
       {pets.map((pet) => (
         <div key={pet.id} className={styles.patient_card}>
           <h2>{pet.name}</h2>

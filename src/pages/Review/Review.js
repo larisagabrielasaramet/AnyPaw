@@ -24,7 +24,7 @@ const Review = () => {
           return {
             ...data,
             id: doc.id,
-            date: data.createdAt ? data.createdAt.toDate() : null, // check if createdAt exists before calling toDate()
+            date: data.createdAt ? data.createdAt.toDate() : null,
           };
         })
         .filter((review) => review.isPosted)

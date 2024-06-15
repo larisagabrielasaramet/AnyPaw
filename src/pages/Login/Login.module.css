@@ -130,3 +130,11 @@
   color: red;
   margin-top: 5px;
 }
+
+.login_icon {
+  position: absolute;
+  right: 800px; /* Ajustați această valoare pentru a muta imaginea la dreapta */
+  top: 360px; /* Ajustați această valoare pentru a muta imaginea în sus */
+  width: 550px; /* Ajustați această valoare pentru a schimba lățimea imaginii */
+  height: 300px; /* Ajustați această valoare pentru a schimba înălțimea imaginii */
+}

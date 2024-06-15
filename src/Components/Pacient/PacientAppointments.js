@@ -11,6 +11,7 @@ function AppointmentPage() {
   const [week, setWeek] = useState(0);
   const [appointments, setAppointments] = useState([]);
   const [doctors, setDoctors] = useState([]);
+  const [patients, setPatients] = useState([]);
   const hours = Array.from({ length: 9 }, (_, i) => i + 9);
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
   const [availability, setAvailability] = useState({});
@@ -100,10 +101,14 @@ function AppointmentPage() {
         .map((doc) => doc.data())
         .filter((user) => user.isDoctor);
       const newDoctors = [...doctorsList];
-
+      const patientsList = doctorsSnapshot.docs
+        .map((doc) => doc.data())
+        .filter((user) => !user.isDoctor);
+      const newPatients = [...patientsList];
+      setPatients(newPatients);
       setDoctors(newDoctors);
     };
-
+    console.log(".....................", patients);
     fetchAppointments();
     fetchDoctors();
   }, [currentDate]);
@@ -152,6 +157,9 @@ function AppointmentPage() {
                     appointments={appointments}
                     selectedDate={selectedDate}
                     currentDate={currentDate}
+                    userId={
+                      getAuth().currentUser ? getAuth().currentUser.uid : null
+                    }
                   />
                 );
               })}

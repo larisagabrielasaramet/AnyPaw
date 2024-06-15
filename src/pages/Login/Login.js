@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
 import Swal from "sweetalert2";
 import { FiEye, FiEyeOff, FiMail, FiLock } from "react-icons/fi";
+import iconLogIn from "./iconLogIn.svg";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,26 +24,20 @@ const Login = () => {
       const user = userCredential.user;
       console.log("User ID: ", user.uid);
 
-      // Query the "user" collection for documents where "uid" is equal to the user's ID
       const querySnapshot = await getDocs(
         query(collection(FIREBASE_DB, "user"), where("uid", "==", user.uid))
       );
 
       if (!querySnapshot.empty) {
-        // The user document was found
         const docSnap = querySnapshot.docs[0];
         const userData = docSnap.data();
 
-        // Check if the user is a doctor
         if (userData.isDoctor) {
-          // Redirect to the doctor page
           window.location.href = "/doctor";
         } else {
-          // Redirect to the patient page
           window.location.href = "/patient";
         }
       } else {
-        // No such document!
         console.log("No such document!");
       }
     } catch (error) {
@@ -58,6 +53,7 @@ const Login = () => {
 
   return (
     <div className={styles.form_container}>
+      <img src={iconLogIn} alt="Log In Icon" className={styles.login_icon} />
       <h2 className={styles.form_title}>Sign in</h2>
       <div className={styles.form_group}>
         <div className={styles.input_icon_wrapper}>

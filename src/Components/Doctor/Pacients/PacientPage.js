@@ -5,12 +5,13 @@ import styles from "./PacientPage.module.css";
 import { useNavigate } from "react-router-dom";
 import AddPetForm from "./AddPetForm.js";
 import SearchBar from "./SearchBar.js";
+import dogic from "./dogic.svg";
 
 function PacientPage() {
   const [patients, setPatients] = useState([]);
   const [medicalHistory, setMedicalHistory] = useState([]);
   const navigate = useNavigate();
-  const [showForm, setShowForm] = useState(false); // adăugați această stare
+  const [showForm, setShowForm] = useState(false);
 
   const fetchPatients = async () => {
     const patientsCollection = collection(FIREBASE_DB, "pet");
@@ -40,8 +41,8 @@ function PacientPage() {
   const handleAddPet = async (pet) => {
     const petsCollection = collection(FIREBASE_DB, "pet");
     await addDoc(petsCollection, pet);
-    setShowForm(false); // închideți formularul
-    fetchPatients(); // reîncărcați lista de pacienți
+    setShowForm(false);
+    fetchPatients();
   };
   const handleHistoryClick = (id) => {
     fetchMedicalHistory(id);
@@ -51,6 +52,7 @@ function PacientPage() {
   return (
     <div className={styles.container}>
       <div className={styles.emptyElement}>
+        <img src={dogic} alt="dogic" className={styles.dogic} />
         <button
           className={styles.addPetButton}
           onClick={() => setShowForm(true)}

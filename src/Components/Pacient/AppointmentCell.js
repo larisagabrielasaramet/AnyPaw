@@ -1,9 +1,18 @@
-import { collection, addDoc, doc, setDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  setDoc,
+  where,
+  query,
+  getDoc,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { moment } from "moment";
 import styles from "./AppointmentCell.module.css";
 import swal from "sweetalert";
-import { FIREBASE_DB } from "../../firebase/firebase";
+import { FIREBASE_DB, FIREBASE_AUTH } from "../../firebase/firebase";
+import { getAuth } from "firebase/auth";
 const AppointmentCell = ({
   hasAppointment,
   day,
@@ -11,17 +20,21 @@ const AppointmentCell = ({
   doctors,
   appointments,
   currentDate,
-  uid,
-  userId,
   index,
+  petId,
+  userId,
 }) => {
   const [availableDocs, setAvailableDocs] = useState([]);
   // În starea componentei
+  const [appointmentState, setAppointmentState] = useState([]);
+  const [isBookedByCurrentUser, setIsBookedByCurrentUser] = useState(false);
+  const [newselectedDateTime, setNewselectedDateTime] = useState(new Date());
+
   const [currentDateTime, setCurrentDateTime] = useState(
     new Date(currentDate.getTime() + index * 24 * 60 * 60 * 1000)
   );
   const [selectedDateTime, setSelectedDateTime] = useState(null);
-  // În useEffect
+
   useEffect(() => {
     const newDateTime = new Date(
       currentDate.getTime() + index * 24 * 60 * 60 * 1000
@@ -53,7 +66,7 @@ const AppointmentCell = ({
       selectedDateTime
     );
     const selectedDoctor = doctors.find(
-      (doctor) => doctor.uid === selectedDoctorId // căutăm doctorul după id, nu după nume
+      (doctor) => doctor.uid === selectedDoctorId
     );
     if (!selectedDoctor) {
       console.error(`No doctor found with id ${selectedDoctorId}`);
@@ -80,20 +93,16 @@ const AppointmentCell = ({
         dangerMode: true,
       }).then((willBook) => {
         if (willBook) {
-          if (
-            !selectedDoctorId || // Use userId instead of id
-            !selectedDateTime ||
-            !inputPetId
-          ) {
+          if (!selectedDoctorId || !selectedDateTime || !inputPetId) {
             console.error("One or more required fields are undefined");
             return;
           }
           const newselectedDateTime = new Date(currentDateTime.getTime());
-          newselectedDateTime.setMinutes(0, 0, 0); // reset minutes and seconds to 0
+          newselectedDateTime.setMinutes(0, 0, 0);
 
           const docRef = doc(
-            collection(FIREBASE_DB, "dappointments"), // schimbați "dappointments" cu numele colecției pentru programările pacienților
-            `${selectedDoctorId}_${newselectedDateTime.getTime()}` // Use userId instead of id
+            collection(FIREBASE_DB, "dappointments"),
+            `${selectedDoctorId}_${newselectedDateTime.getTime()}`
           );
           setDoc(docRef, {
             userId: selectedDoctorId,
@@ -101,7 +110,6 @@ const AppointmentCell = ({
             petId: inputPetId,
           });
         }
-        // console.log(currentDateTime.getTime());
       });
     });
   };
@@ -116,7 +124,7 @@ const AppointmentCell = ({
       "Friday",
       "Saturday",
     ];
-    //const moment = require("moment");
+
     const selectedDate = new Date(currentDate);
     const currentDayOfWeek = selectedDate.getDay();
     const distance = (days.indexOf(day) - currentDayOfWeek + 7) % 7;
@@ -125,7 +133,7 @@ const AppointmentCell = ({
       selectedDate.getMonth(),
       selectedDate.getDate() + distance
     );
-    newselectedDate.setHours(hour); // Set the hour for the selected date
+    newselectedDate.setHours(hour);
     console.log("New selected date: ", newselectedDate);
 
     const availableDoctors = doctors.filter((doctor) => {
@@ -135,24 +143,13 @@ const AppointmentCell = ({
         (appointment) => {
           if (appointment && appointment.date) {
             const appointmentTime = appointment.date.toDate();
-            appointmentTime.setMinutes(0, 0, 0); // reset minutes and seconds to 0
+            appointmentTime.setMinutes(0, 0, 0);
             console.log("Appointment time: ", appointmentTime);
             const newselectedDateTime = new Date(newselectedDate.getTime());
-            newselectedDateTime.setMinutes(0, 0, 0); // reset minutes and seconds to 0
+            newselectedDateTime.setMinutes(0, 0, 0);
             console.log("New selected date time: ", newselectedDateTime);
             setSelectedDateTime(newselectedDateTime);
             return appointmentTime.getTime() === newselectedDateTime.getTime();
-
-            // const formattedSelectedTime = moment(newselectedDate).format(
-            //   "MMMM D, YYYY [at] h:mm A"
-            // );
-            // console.log("Selected time string: ", formattedSelectedTime);
-
-            // const formattedAppointmentTime = moment(appointmentTime).format(
-            //   "MMMM D, YYYY [at] h:mm A"
-            // );
-            // console.log("Appointment time string: ", formattedAppointmentTime);
-            // return formattedSelectedTime === formattedAppointmentTime;
           }
           return false;
         }
@@ -162,20 +159,125 @@ const AppointmentCell = ({
     });
     console.log("Available doctors: ", availableDoctors, "at", newselectedDate);
     if (availableDoctors.length === 0) {
-      // console.log(`No available doctors on ${day} at ${hour}:00`);
     }
-
-    // console.log(
-    //   `Available doctors: ${JSON.stringify(availableDoctors, null, 2)}`
-    // );
     const newAvailableDocs = [...availableDoctors];
-
-    setAvailableDocs(newAvailableDocs); // Actualizați starea cu doctorii disponibili
+    setNewselectedDateTime(newselectedDateTime);
+    setAvailableDocs(newAvailableDocs);
   };
+  useEffect(() => {
+    const checkIfBookedByCurrentUser = async () => {
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
 
+      const uid = currentUser ? currentUser.uid : null;
+      if (!uid) {
+        console.error("User is not logged in!");
+        return;
+      }
+
+      console.log("Checking document for uid:", uid); // Log the uid
+
+      const userRef = collection(FIREBASE_DB, "user");
+      const userSnap = await getDocs(userRef);
+      const userDoc = userSnap.docs.find((doc) => doc.data().uid === uid);
+
+      if (!userDoc) {
+        console.error("User document does not exist!");
+        return;
+      }
+      const docId = userDoc.id;
+      console.log("User's document ID (userId):", docId);
+      const querySnapshot = await getDocs(
+        query(
+          collection(FIREBASE_DB, "dappointments"),
+          where("userId", "==", userId)
+        )
+      );
+
+      const data = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+        date: moment(doc.data().date.toDate()),
+        isCurrentUserAppointment: doc.data().userId === userId,
+      }));
+
+      if (currentUser) {
+        console.log("Current user ID:", docId);
+
+        setAppointmentState(data);
+        const appointmentsRef = collection(FIREBASE_DB, "dappointments");
+        const appointmentsSnap = await getDocs(appointmentsRef);
+        const appointments = appointmentsSnap.docs.map((doc) => {
+          console.log(doc.data()); // log the entire document data
+          return doc.data();
+        });
+
+        const petsRef = collection(FIREBASE_DB, "pet");
+        const petsSnap = await getDocs(petsRef);
+        const pets = petsSnap.docs.map((doc) => doc.data());
+
+        // Get the petIds of the pets that belong to the current user
+        const userPetIds = pets.filter((pets) => pets.userId === docId);
+        console.log("Appointments:", appointments);
+
+        console.log("ID CURENT", docId);
+        console.log("pets:", pets);
+        console.log("User Pet IDs:", userPetIds);
+        console.log("!!!!!!!!!!!!!Selected DateTime:", selectedDateTime);
+        // Filter the appointments that belong to the current user's pets
+        const patientAppointments = appointments.filter((appointment) => {
+          const appointmentDate = new Date(appointment.date.seconds * 1000);
+          console.log("Appointment date:", appointmentDate);
+          console.log(appointmentDate, selectedDateTime);
+          return (
+            // userPetIds.includes(appointment.docId) &&
+
+            new Date(appointmentDate).getTime() ===
+            new Date(selectedDateTime).getTime() // compare the time values
+          );
+        });
+
+        console.log(
+          "Appointments:",
+          appointments.map((a) => ({
+            userId: a.userId,
+            date: a.date.toDate(),
+            petId: a.petId,
+          }))
+        );
+
+        console.log("Patient app:", patientAppointments);
+
+        // Check if the selected date and time matches any of the user's appointments
+        const isBooked = patientAppointments.some(
+          (appointment) =>
+            new Date(appointment.date.seconds * 1000).getTime() ===
+            selectedDateTime.getTime()
+        );
+
+        console.log("!Is booked:", isBooked);
+
+        if (isBooked) {
+          setIsBookedByCurrentUser(true);
+        }
+      }
+    };
+
+    checkIfBookedByCurrentUser();
+  }, [userId, petId, selectedDateTime]);
   return (
-    <td className={availableDocs.length === 0 ? styles.cell : ""}>
-      {availableDocs.length === 0 ? (
+    <td
+      className={
+        isBookedByCurrentUser
+          ? styles.bookedCell
+          : availableDocs.length === 0
+          ? styles.cell
+          : ""
+      }
+    >
+      {isBookedByCurrentUser ? (
+        <div className={styles.booked}>Booked by you</div>
+      ) : availableDocs.length === 0 ? (
         <div className={styles.noDoctors}>Unavailable</div>
       ) : (
         <select
@@ -184,7 +286,7 @@ const AppointmentCell = ({
         >
           {availableDocs.map((doctor) => {
             return (
-              <option key={doctor.id} value={doctor.uid} placeholder="+">
+              <option key={doctor.id} value={doctor.uid}>
                 {doctor.fullName}
               </option>
             );
