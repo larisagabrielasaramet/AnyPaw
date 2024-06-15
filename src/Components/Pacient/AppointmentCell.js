@@ -185,8 +185,8 @@ const AppointmentCell = ({
         console.error("User document does not exist!");
         return;
       }
-      const docId = userDoc.id;
-      console.log("User's document ID (userId):", docId);
+      const patientId = userDoc.id;
+      console.log("User's document ID (userId):", patientId);
       const querySnapshot = await getDocs(
         query(
           collection(FIREBASE_DB, "dappointments"),
@@ -202,7 +202,7 @@ const AppointmentCell = ({
       }));
 
       if (currentUser) {
-        console.log("Current user ID:", docId);
+        console.log("Current user ID:", patientId);
 
         setAppointmentState(data);
         const appointmentsRef = collection(FIREBASE_DB, "dappointments");
@@ -217,10 +217,11 @@ const AppointmentCell = ({
         const pets = petsSnap.docs.map((doc) => doc.data());
 
         // Get the petIds of the pets that belong to the current user
-        const userPetIds = pets.filter((pets) => pets.userId === docId);
+        const userPetIds = pets.filter((pets) => pets.userId === patientId);
+
         console.log("Appointments:", appointments);
 
-        console.log("ID CURENT", docId);
+        console.log("ID CURENT", patientId);
         console.log("pets:", pets);
         console.log("User Pet IDs:", userPetIds);
         console.log("!!!!!!!!!!!!!Selected DateTime:", selectedDateTime);
@@ -230,10 +231,9 @@ const AppointmentCell = ({
           console.log("Appointment date:", appointmentDate);
           console.log(appointmentDate, selectedDateTime);
           return (
-            // userPetIds.includes(appointment.docId) &&
-
+            userPetIds.includes(patientId) &&
             new Date(appointmentDate).getTime() ===
-            new Date(selectedDateTime).getTime() // compare the time values
+              new Date(selectedDateTime).getTime() // compare the time values
           );
         });
 
