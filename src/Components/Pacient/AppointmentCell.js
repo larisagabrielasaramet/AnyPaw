@@ -35,7 +35,6 @@ const AppointmentCell = ({
     new Date(currentDate.getTime() + index * 24 * 60 * 60 * 1000)
   );
   const [selectedDateTime, setSelectedDateTime] = useState(null);
-  const [isDropdownExpanded, setIsDropdownExpanded] = useState(false);
 
   useEffect(() => {
     const newDateTime = new Date(

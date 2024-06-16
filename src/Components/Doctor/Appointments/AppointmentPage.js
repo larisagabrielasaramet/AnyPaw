@@ -275,7 +275,7 @@ function AppointmentPage() {
         const result = await createCalendarEvent({
           startDateTime: appointmentDate.format(),
           endDateTime: appointmentDate.add(1, "hours").format(),
-          email: "User Email", // Replace with the user's email
+          email: "User Email",
         });
         console.log("Calendar event created:", result.data);
       } catch (error) {
@@ -422,14 +422,6 @@ function AppointmentPage() {
               <strong>Phone:</strong> {userDetails && userDetails.phone}
             </p>
           </div>
-
-          {/* <div>
-            {selectedAppointment && selectedAppointment.date
-              ? moment(selectedAppointment.date).format(
-                  "MMMM Do YYYY, h:mm:ss a"
-                )
-              : "No appointment selected"}
-          </div> */}
         </div>
       )}
 
