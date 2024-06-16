@@ -6,6 +6,8 @@
   content: fixed;
   margin-top: -20px;
   background-color: #f4f3f3;
+  position: relative;
+  min-height: 100vh; /* Ensure the spinner is centered vertically */
 }
 .AppointmentPage {
   margin-top: 150px;
@@ -15,7 +17,22 @@
   font-size: 1em;
   table-layout: fixed;
 }
-
+.spinnerContainer {
+  border: 16px solid #e6e6e6; /* Light grey */
+  border-top: 16px solid #0a5c5c; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .AppointmentPage th,
 .AppointmentPage td {
   border: 0.5px solid #0a5c5c;

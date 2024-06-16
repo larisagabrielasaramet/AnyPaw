@@ -19,7 +19,7 @@
   background-color: #0a5c5c;
   color: white;
   border: none;
-  width: 85px;
+  width: 80px;
   height: 18px;
   border-radius: 20px;
   cursor: pointer;
@@ -31,13 +31,32 @@
   justify-content: center;
   align-items: center; */
 }
-
+.dropdownDoctor:hover {
+  background-color: #0a5c5c;
+}
+.spinnerContainer {
+  border: 16px solid #e6e6e6; /* Light grey */
+  border-top: 16px solid #0a5c5c; /* Blue */
+  border-radius: 20%;
+  width: 2px;
+  height: 2px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .dropdownDoctor div {
   margin-top: 2px;
   padding: 10px;
   cursor: pointer;
   border-radius: 20px;
 }
+
 .dropdownDoctor:focus {
   background-color: #0a5c5c;
   color: white;
@@ -67,4 +86,18 @@
 
 .appointmentCell button:hover {
   background-color: #0a5c5c;
+}
+
+.mymodal .swal_title {
+  color: #5a5a5a;
+  font-size: 2em;
+}
+
+.mymodal .swal_button {
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
+  font-size: 1em;
 }

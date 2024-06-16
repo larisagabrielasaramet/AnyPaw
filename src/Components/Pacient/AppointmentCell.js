@@ -5,16 +5,16 @@ import {
   setDoc,
   where,
   query,
-  getDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { moment } from "moment";
+import moment from "moment";
 import styles from "./AppointmentCell.module.css";
 import swal from "sweetalert";
-import { FIREBASE_DB, FIREBASE_AUTH } from "../../firebase/firebase";
+import { FIREBASE_DB } from "../../firebase/firebase";
 import { getAuth } from "firebase/auth";
+import { Spinner } from "react-bootstrap";
+
 const AppointmentCell = ({
-  hasAppointment,
   day,
   hour,
   doctors,
@@ -25,16 +25,17 @@ const AppointmentCell = ({
   userId,
 }) => {
   const [availableDocs, setAvailableDocs] = useState([]);
-  // În starea componentei
   const [appointmentState, setAppointmentState] = useState([]);
   const [isBookedByCurrentUser, setIsBookedByCurrentUser] = useState(false);
   const [newselectedDateTime, setNewselectedDateTime] = useState(new Date());
   const [hasNewAppointment, setHasNewAppointment] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [currentDateTime, setCurrentDateTime] = useState(
     new Date(currentDate.getTime() + index * 24 * 60 * 60 * 1000)
   );
   const [selectedDateTime, setSelectedDateTime] = useState(null);
+  const [isDropdownExpanded, setIsDropdownExpanded] = useState(false);
 
   useEffect(() => {
     const newDateTime = new Date(
@@ -42,31 +43,18 @@ const AppointmentCell = ({
     );
     newDateTime.setHours(hour);
     setCurrentDateTime(newDateTime);
+    setIsLoading(true);
     checkDoctorAvailability(day, hour);
   }, [doctors, appointments, currentDate, hour, index, hasNewAppointment]);
 
   const handleSelect = (day, hour, event) => {
-    console.log("Day: ", day);
-    console.log("Hour: ", hour);
-    console.log("Event: ", event);
-
     const selectedDoctorId = event.target.value;
-    console.log("Selected doctor id: ", selectedDoctorId);
-    console.log("Selected date and time: ", selectedDateTime);
     const currentDateTime = new Date();
 
-    console.log(
-      "handleSelect called with",
-      day,
-      hour,
-      selectedDoctorId,
-      selectedDateTime
-    );
     const selectedDoctor = doctors.find(
       (doctor) => doctor.uid === selectedDoctorId
     );
     if (!selectedDoctor) {
-      console.error(`No doctor found with id ${selectedDoctorId}`);
       return;
     }
 
@@ -76,6 +64,7 @@ const AppointmentCell = ({
       button: {
         text: "Submit",
         closeModal: true,
+        background: "#0a5c5c",
       },
     }).then((inputPetId) => {
       if (!inputPetId) {
@@ -108,8 +97,8 @@ const AppointmentCell = ({
       });
     });
   };
-  const checkDoctorAvailability = (day, hour) => {
-    console.log("Checking doctor availability for ", day, hour);
+
+  const checkDoctorAvailability = async (day, hour) => {
     const days = [
       "Sunday",
       "Monday",
@@ -129,20 +118,19 @@ const AppointmentCell = ({
       selectedDate.getDate() + distance
     );
     newselectedDate.setHours(hour);
-    console.log("New selected date: ", newselectedDate);
 
     const availableDoctors = doctors.filter((doctor) => {
       const doctorAppointments = appointments[doctor.uid] || [];
-      console.log("Doctor appointments: ", doctorAppointments);
+
       const hasAppointmentAtSameTime = doctorAppointments.some(
         (appointment) => {
           if (appointment && appointment.date) {
             const appointmentTime = appointment.date.toDate();
             appointmentTime.setMinutes(0, 0, 0);
-            console.log("Appointment time: ", appointmentTime);
+
             const newselectedDateTime = new Date(newselectedDate.getTime());
             newselectedDateTime.setMinutes(0, 0, 0);
-            console.log("New selected date time: ", newselectedDateTime);
+
             setSelectedDateTime(newselectedDateTime);
             return appointmentTime.getTime() === newselectedDateTime.getTime();
           }
@@ -152,37 +140,35 @@ const AppointmentCell = ({
 
       return !hasAppointmentAtSameTime;
     });
-    console.log("Available doctors: ", availableDoctors, "at", newselectedDate);
-    if (availableDoctors.length === 0) {
-    }
+
     const newAvailableDocs = [...availableDoctors];
     setNewselectedDateTime(newselectedDateTime);
     setAvailableDocs(newAvailableDocs);
+    setIsLoading(false);
   };
+
   useEffect(() => {
     setIsBookedByCurrentUser(false);
     const checkIfBookedByCurrentUser = async () => {
+      setIsLoading(true);
       const auth = getAuth();
       const currentUser = auth.currentUser;
 
       const uid = currentUser ? currentUser.uid : null;
       if (!uid) {
-        console.error("User is not logged in!");
+        setIsLoading(false);
         return;
       }
-
-      console.log("Checking document for uid:", uid); // Log the uid
 
       const userRef = collection(FIREBASE_DB, "user");
       const userSnap = await getDocs(userRef);
       const userDoc = userSnap.docs.find((doc) => doc.data().uid === uid);
 
       if (!userDoc) {
-        console.error("User document does not exist!");
+        setIsLoading(false);
         return;
       }
       const patientId = userDoc.id;
-      console.log("User's document ID (userId):", patientId);
       const querySnapshot = await getDocs(
         query(
           collection(FIREBASE_DB, "dappointments"),
@@ -198,13 +184,10 @@ const AppointmentCell = ({
       }));
 
       if (currentUser) {
-        console.log("Current user ID:", patientId);
-
         setAppointmentState(data);
         const appointmentsRef = collection(FIREBASE_DB, "dappointments");
         const appointmentsSnap = await getDocs(appointmentsRef);
         const appointments = appointmentsSnap.docs.map((doc) => {
-          console.log(doc.data()); // log the entire document data
           return doc.data();
         });
 
@@ -215,55 +198,35 @@ const AppointmentCell = ({
           ...doc.data(),
         }));
 
-        // Get the petIds of the pets that belong to the current user
         const userPetIds = pets
           .filter((pet) => pet.userId === patientId)
           .map((pet) => pet.id);
 
-        console.log("ID CURENT", patientId);
-        console.log("pets:", pets);
-        console.log("User Pet IDs:", userPetIds);
-        console.log("!!!!!!!!!!!!!Selected DateTime:", newselectedDateTime);
-        // Filter the appointments that belong to the current user's pets
         const patientAppointments = appointments.filter((appointment) => {
           const appointmentDate = new Date(appointment.date.seconds * 1000);
-          console.log("Appointment date:", appointmentDate);
-          console.log(appointmentDate, selectedDateTime);
+
           return (
             userPetIds.includes(appointment.petId) &&
             new Date(appointmentDate).getTime() ===
-              new Date(selectedDateTime).getTime() // compare the time values
+              new Date(selectedDateTime).getTime()
           );
         });
 
-        console.log(
-          "Appointments:",
-          appointments.map((a) => ({
-            userId: a.userId,
-            date: a.date.toDate(),
-            petId: a.petId,
-          }))
-        );
-
-        console.log("Patient app:", patientAppointments);
-
-        // Check if the selected date and time matches any of the user's appointments
         const isBooked = patientAppointments.some(
           (appointment) =>
             new Date(appointment.date.seconds * 1000).getTime() ===
             selectedDateTime.getTime()
         );
-
-        console.log("!Is booked:", isBooked);
-
         if (isBooked) {
           setIsBookedByCurrentUser(true);
         }
       }
+      setIsLoading(false);
     };
 
     checkIfBookedByCurrentUser();
   }, [userId, petId, selectedDateTime]);
+
   return (
     <td
       className={
@@ -274,7 +237,13 @@ const AppointmentCell = ({
           : ""
       }
     >
-      {isBookedByCurrentUser ? (
+      {isLoading ? (
+        <div>
+          <Spinner animation="border" role="status">
+            <span>...</span>
+          </Spinner>
+        </div>
+      ) : isBookedByCurrentUser ? (
         <div className={styles.booked}>Booked by you</div>
       ) : availableDocs.length === 0 ? (
         <div className={styles.noDoctors}>Unavailable</div>
@@ -283,6 +252,9 @@ const AppointmentCell = ({
           className={styles.dropdownDoctor}
           onChange={(event) => handleSelect(day, hour, event, currentDateTime)}
         >
+          <option className={styles.option1} value="" disabled selected>
+            +
+          </option>
           {availableDocs.map((doctor) => {
             return (
               <option key={doctor.id} value={doctor.uid}>
