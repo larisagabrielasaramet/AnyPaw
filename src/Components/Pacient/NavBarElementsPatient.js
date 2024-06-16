@@ -53,7 +53,7 @@ export const NavMenu = styled.div`
   display: flex;
   align-items: center;
   content: "";
-  margin-right: 150px;
+  margin-right: 140px;
   @media screen and (max-width: 768px) {
     display: none;
   }
@@ -66,11 +66,11 @@ export const NavBtn = styled.nav`
   display: flex;
   align-items: center;
   margin-left: auto;
-  margin-right: -90px;
+  margin-right: -60px;
 `;
 
 export const NavBtnLink = styled(Link)`
-  padding: 15px;
+  padding: 20px;
   padding-top: 15px;
   border-radius: 24px;
   background: #0a5c5c;
@@ -80,8 +80,8 @@ export const NavBtnLink = styled(Link)`
   color: white;
   outline: none;
   cursor: pointer;
-  height: 28px;
-  width: 60px;
+  height: 12px;
+  width: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,6 +97,6 @@ export const NavBtnLink = styled(Link)`
 
 export const LogoContainer = styled.div`
   display: flex;
-  margin-left: 10px;
+  margin-left: 20px;
   margin-right: 30px;
 `;

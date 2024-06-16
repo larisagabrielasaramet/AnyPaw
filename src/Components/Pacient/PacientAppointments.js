@@ -90,7 +90,7 @@ function AppointmentPage() {
         }
         appointmentsByDoctor[appointment.userId].push(appointment);
       });
-
+      console.log("appointmentsByDoctor", appointmentsByDoctor);
       setAppointments(appointmentsByDoctor);
     };
 

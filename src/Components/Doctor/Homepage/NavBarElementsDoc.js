@@ -60,7 +60,7 @@ export const NavMenu = styled.div`
 
 export const NavBtn = styled.nav`
   margin-top: 8px;
-  padding: 15px;
+  padding: 20px;
   background: #0a5c5c;
   border-radius: 20px;
   display: flex;
@@ -70,17 +70,18 @@ export const NavBtn = styled.nav`
 `;
 
 export const NavBtnLink = styled(Link)`
-  padding: 15px;
+  padding: 20px;
+  padding-top: 15px;
   border-radius: 24px;
   background: #0a5c5c;
   border: 2px solid white;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: white;
   outline: none;
   cursor: pointer;
-  height: 28px;
-  width: 60px;
+  height: 12px;
+  width: 90px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,7 +89,7 @@ export const NavBtnLink = styled(Link)`
   text-decoration: none;
   margin-left: 80px;
   position: relative;
-  top: -5px; // mută textul 5px mai sus
+  top: -4px; // mută textul 5px mai sus
   &:hover {
     transition: all 0.2s ease-in-out;
     background: white;

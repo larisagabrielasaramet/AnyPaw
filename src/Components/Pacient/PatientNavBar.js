@@ -51,7 +51,7 @@ const PatientNavbar = () => {
           Contact
         </NavLink>
         <NavLink to="/patient/appointments">Appointments</NavLink>
-        <NavLink to="/patient/profile">My Profile</NavLink>
+        <NavLink to="/patient/profile">Profile</NavLink>
       </NavMenu>
       <NavBtn>
         <NavBtnLink onClick={handleSignOut}>Sign Out</NavBtnLink>

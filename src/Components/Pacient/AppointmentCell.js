@@ -29,6 +29,7 @@ const AppointmentCell = ({
   const [appointmentState, setAppointmentState] = useState([]);
   const [isBookedByCurrentUser, setIsBookedByCurrentUser] = useState(false);
   const [newselectedDateTime, setNewselectedDateTime] = useState(new Date());
+  const [hasNewAppointment, setHasNewAppointment] = useState(0);
 
   const [currentDateTime, setCurrentDateTime] = useState(
     new Date(currentDate.getTime() + index * 24 * 60 * 60 * 1000)
@@ -42,11 +43,7 @@ const AppointmentCell = ({
     newDateTime.setHours(hour);
     setCurrentDateTime(newDateTime);
     checkDoctorAvailability(day, hour);
-  }, [doctors, appointments, currentDate, hour, index]);
-
-  useEffect(() => {
-    checkDoctorAvailability(day, hour);
-  }, [doctors, appointments]);
+  }, [doctors, appointments, currentDate, hour, index, hasNewAppointment]);
 
   const handleSelect = (day, hour, event) => {
     console.log("Day: ", day);
@@ -100,15 +97,13 @@ const AppointmentCell = ({
           const newselectedDateTime = new Date(currentDateTime.getTime());
           newselectedDateTime.setMinutes(0, 0, 0);
 
-          const docRef = doc(
-            collection(FIREBASE_DB, "dappointments"),
-            `${selectedDoctorId}_${newselectedDateTime.getTime()}`
-          );
+          const docRef = doc(collection(FIREBASE_DB, "dappointments"));
           setDoc(docRef, {
             userId: selectedDoctorId,
             date: selectedDateTime,
             petId: inputPetId,
           });
+          setHasNewAppointment(hasNewAppointment + 1);
         }
       });
     });
@@ -165,6 +160,7 @@ const AppointmentCell = ({
     setAvailableDocs(newAvailableDocs);
   };
   useEffect(() => {
+    setIsBookedByCurrentUser(false);
     const checkIfBookedByCurrentUser = async () => {
       const auth = getAuth();
       const currentUser = auth.currentUser;
@@ -214,24 +210,27 @@ const AppointmentCell = ({
 
         const petsRef = collection(FIREBASE_DB, "pet");
         const petsSnap = await getDocs(petsRef);
-        const pets = petsSnap.docs.map((doc) => doc.data());
+        const pets = petsSnap.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
 
         // Get the petIds of the pets that belong to the current user
-        const userPetIds = pets.filter((pets) => pets.userId === patientId);
-
-        console.log("Appointments:", appointments);
+        const userPetIds = pets
+          .filter((pet) => pet.userId === patientId)
+          .map((pet) => pet.id);
 
         console.log("ID CURENT", patientId);
         console.log("pets:", pets);
         console.log("User Pet IDs:", userPetIds);
-        console.log("!!!!!!!!!!!!!Selected DateTime:", selectedDateTime);
+        console.log("!!!!!!!!!!!!!Selected DateTime:", newselectedDateTime);
         // Filter the appointments that belong to the current user's pets
         const patientAppointments = appointments.filter((appointment) => {
           const appointmentDate = new Date(appointment.date.seconds * 1000);
           console.log("Appointment date:", appointmentDate);
           console.log(appointmentDate, selectedDateTime);
           return (
-            userPetIds.includes(patientId) &&
+            userPetIds.includes(appointment.petId) &&
             new Date(appointmentDate).getTime() ===
               new Date(selectedDateTime).getTime() // compare the time values
           );
