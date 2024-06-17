@@ -47,7 +47,54 @@
 }
 
 .adopt_button:hover {
-  transform: scale(1.05); /* Mărește cardul cu 5% */
-  transition: transform 0.3s ease-in-out; /* Animă transformarea pe o perioadă de 0.3 secunde */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px white; /* Adaugă o umbră mai mare */
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px white;
+}
+
+.all_adoption,
+.my_adoption {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+  width: 100%;
+}
+
+.all_adoption h3,
+.my_adoption h3 {
+  font-size: 24px;
+  color: #0a5c5c;
+  margin-bottom: 20px;
+  grid-column: span 3;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 2em;
+  margin-top: -50px;
+  margin-left: 450px;
+  margin-bottom: 50px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.button_group {
+  display: flex;
+  margin-left: 1085px;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.button_group button {
+  width: 100px;
+  height: 40px;
+  border-radius: 16px;
+  border: none;
+  font-size: 0.9em;
+  color: white;
+  background-color: #0a5c5c;
+}
+
+.button_group button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px white;
 }

@@ -11,9 +11,9 @@
   box-shadow: 0 0 8px #808080;
 }
 .adoption_card:hover {
-  transform: scale(1.05); /* Mărește cardul cu 5% */
-  transition: transform 0.3s ease-in-out; /* Animă transformarea pe o perioadă de 0.3 secunde */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px #0a5c5c; /* Adaugă o umbră mai mare */
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px #0a5c5c;
 }
 .adoption_card h2 {
   font-size: 24px;

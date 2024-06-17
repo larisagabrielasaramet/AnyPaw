@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { collection, addDoc } from "firebase/firestore";
+import { getDocs, query, collection, where, addDoc } from "firebase/firestore";
 import {
   getStorage,
   ref,
@@ -20,9 +20,19 @@ const AdoptionForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    const q = query(
+      collection(FIREBASE_DB, "user"),
+      where("uid", "==", auth.currentUser.uid)
+    );
+    const querySnapshot = await getDocs(q);
+    const userId =
+      querySnapshot.docs.length > 0
+        ? querySnapshot.docs[0].id
+        : auth.currentUser.uid;
+
     const newData = {
       ...data,
-      userId: auth.currentUser.uid,
+      userId: userId,
       images,
       imageUrl,
     };
