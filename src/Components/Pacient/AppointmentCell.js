@@ -5,6 +5,7 @@ import {
   setDoc,
   where,
   query,
+  deleteDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
@@ -13,7 +14,8 @@ import swal from "sweetalert";
 import { FIREBASE_DB } from "../../firebase/firebase";
 import { getAuth } from "firebase/auth";
 import { Spinner } from "react-bootstrap";
-
+import Swal from "sweetalert2";
+import { FaTrash } from "react-icons/fa";
 const AppointmentCell = ({
   day,
   hour,
@@ -183,13 +185,14 @@ const AppointmentCell = ({
       }));
 
       if (currentUser) {
-        setAppointmentState(data);
         const appointmentsRef = collection(FIREBASE_DB, "dappointments");
         const appointmentsSnap = await getDocs(appointmentsRef);
         const appointments = appointmentsSnap.docs.map((doc) => {
-          return doc.data();
+          return { id: doc.id, ...doc.data() };
         });
+        setAppointmentState(appointments);
 
+        console.log(appointmentState);
         const petsRef = collection(FIREBASE_DB, "pet");
         const petsSnap = await getDocs(petsRef);
         const pets = petsSnap.docs.map((doc) => ({
@@ -225,7 +228,42 @@ const AppointmentCell = ({
 
     checkIfBookedByCurrentUser();
   }, [userId, petId, selectedDateTime]);
+  useEffect(() => {}, [appointmentState]);
+  const handleDelete = async () => {
+    const appointmentToDelete = appointmentState.find(
+      (appointment) =>
+        new Date(appointment.date.seconds * 1000).getTime() ===
+        selectedDateTime.getTime()
+    );
 
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#0a5c5c",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      const docRef = doc(FIREBASE_DB, "dappointments", appointmentToDelete.id);
+      console.log("Deleting appointment with id: ", docRef);
+      await deleteDoc(docRef)
+        .then(() => {
+          Swal.fire(
+            "Deleted!",
+            "Your appointment has been deleted.",
+            "success"
+          );
+        })
+        .catch((error) => {
+          console.error("Error deleting appointment: ", error);
+        });
+
+      setHasNewAppointment(hasNewAppointment - 1);
+    }
+  };
   return (
     <td
       className={
@@ -243,7 +281,12 @@ const AppointmentCell = ({
           </Spinner>
         </div>
       ) : isBookedByCurrentUser ? (
-        <div className={styles.booked}>Booked by you</div>
+        <div className={styles.booked}>
+          Booked by you
+          <button className={styles.deleteButton} onClick={handleDelete}>
+            <FaTrash />
+          </button>
+        </div>
       ) : availableDocs.length === 0 ? (
         <div className={styles.noDoctors}>Unavailable</div>
       ) : (
