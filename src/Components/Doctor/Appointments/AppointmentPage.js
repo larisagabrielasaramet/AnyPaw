@@ -67,6 +67,7 @@ function AppointmentPage() {
   const [appointmentDate, setAppointmentDate] = useState(null);
   const functions = getFunctions();
   const createCalendarEvent = httpsCallable(functions, "createCalendarEvent");
+  const [petIds, setPetIds] = useState([]);
 
   React.useEffect(() => {
     if (petId) {
@@ -79,6 +80,15 @@ function AppointmentPage() {
   function handleClosePopup() {
     setIsPopupOpen(false);
   }
+  async function getPetId() {
+    const petCollection = collection(FIREBASE_DB, "pet");
+    const petSnapshot = await getDocs(petCollection);
+    const petIds = petSnapshot.docs.map((doc) => doc.id);
+    return petIds;
+  }
+  useEffect(() => {
+    getPetId().then((ids) => setPetIds(ids));
+  }, []);
 
   async function handleAppointmentClick(appointment) {
     const petId = appointment.petId;
@@ -367,12 +377,16 @@ function AppointmentPage() {
                 <Form.Group controlId="formPetId">
                   <Form.Label></Form.Label>
                   <Form.Control
-                    type="text"
-                    placeholder="Enter pet ID"
+                    className={styles.selectCss}
+                    as="select"
                     value={petIdState}
-                    onChange={handlePetIdChange}
-                    className={styles.inputField}
-                  />
+                    onChange={(e) => setPetId(e.target.value)}
+                  >
+                    <option value="">Select pet ID</option>
+                    {petIds.map((id) => (
+                      <option value={id}>{id}</option>
+                    ))}
+                  </Form.Control>
                 </Form.Group>
                 <Button
                   variant="primary"

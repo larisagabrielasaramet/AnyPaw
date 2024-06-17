@@ -30,7 +30,7 @@
 }
 .patient_card:hover {
   background-color: #f5f5f5;
-  transition: background-color 0.3s ease; /* Animă schimbarea culorii de fundal pe o perioadă de 0.3 secunde */
+  transition: background-color 0.3s ease;
   transform: scale(1.05);
 }
 .patient_card h2 {

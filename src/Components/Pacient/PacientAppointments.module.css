@@ -7,7 +7,7 @@
   margin-top: -20px;
   background-color: #f4f3f3;
   position: relative;
-  min-height: 100vh; /* Ensure the spinner is centered vertically */
+  min-height: 100vh;
 }
 .AppointmentPage {
   margin-top: 150px;
@@ -18,8 +18,8 @@
   table-layout: fixed;
 }
 .spinnerContainer {
-  border: 16px solid #e6e6e6; /* Light grey */
-  border-top: 16px solid #0a5c5c; /* Blue */
+  border: 16px solid #e6e6e6;
+  border-top: 16px solid #0a5c5c;
   border-radius: 50%;
   width: 60px;
   height: 60px;
