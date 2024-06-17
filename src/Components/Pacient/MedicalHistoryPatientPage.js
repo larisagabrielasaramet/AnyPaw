@@ -4,7 +4,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { FIREBASE_DB } from "../../firebase/firebase";
 import PatientNavbar from "./PatientNavBar";
 import styles from "./MedicalHistoryPatientPage.module.css";
-
+import { jsPDF } from "jspdf";
+import { FiDownload } from "react-icons/fi";
 function MedicalHistoryPage() {
   const { petId } = useParams();
   const [medicalHistory, setMedicalHistory] = useState([]);
@@ -34,11 +35,33 @@ function MedicalHistoryPage() {
 
     fetchMedicalHistory();
   }, [petId]);
+  const downloadMedicalHistory = () => {
+    const doc = new jsPDF();
+
+    doc.text(`Pet Name: ${petData.name}`, 10, 10);
+    doc.text(`Pet ID: ${petId}`, 10, 20);
+    doc.text(`Pet Sex: ${petData.sex}`, 10, 30);
+    doc.text(`Pet Type: ${petData.type}`, 10, 40);
+    doc.text(`Pet Weight: ${petData.weight}`, 10, 50);
+    doc.text(`Owner Name: ${userData.fullName}`, 10, 60);
+    doc.text(`Owner Phone: ${userData.phone}`, 10, 70);
+    doc.text(`Owner Email: ${userData.email}`, 10, 80);
+    doc.text(`Medical History:`, 10, 90);
+    medicalHistory.forEach((entry, index) => {
+      doc.text(entry, 10, 100 + index * 10);
+    });
+
+    doc.save(`${petData.name}_medical_history.pdf`);
+  };
 
   return (
     <div className={styles.container}>
       <PatientNavbar />
       <div className={styles.card}>
+        <button className={styles.download} onClick={downloadMedicalHistory}>
+          <FiDownload size={18} color="white" />
+          Download Medical History
+        </button>
         <h1 className={styles.title}>{petData.name}</h1>
         <div className={styles.detailsContainer}>
           <div className={styles.petDetails}>

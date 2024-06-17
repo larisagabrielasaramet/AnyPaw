@@ -116,3 +116,23 @@
 .ownerDetails {
   width: 50%;
 }
+
+.download {
+  background-color: #0a5c5c;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download:hover {
+  background-color: #088585;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

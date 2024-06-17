@@ -41,6 +41,7 @@ const PacientProfile = () => {
   useEffect(() => {
     fetchPets();
   }, []);
+
   return (
     <div className={styles.container}>
       <img src={catic} alt="catic" className={styles.catic} />
