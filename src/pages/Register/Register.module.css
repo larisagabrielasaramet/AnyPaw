@@ -128,13 +128,11 @@
 
 .register_icon {
   position: absolute;
-  right: 270px; /* Ajustați această valoare pentru a muta imaginea la dreapta */
-  top: 410px; /* Ajustați această valoare pentru a muta imaginea în sus */
-  width: 400px; /* Ajustați această valoare pentru a schimba lățimea imaginii */
-  height: 300px; /* Ajustați această valoare pentru a schimba înălțimea imaginii */
+  right: 270px;
+  top: 410px;
+  width: 400px;
+  height: 300px;
 }
-
-/* Stiluri pentru ecrane cu lățimea mai mică de 768px */
 @media (max-width: 768px) {
   .form_container {
     max-width: 90%;
@@ -163,7 +161,6 @@
   }
 }
 
-/* Stiluri pentru ecrane cu lățimea mai mică de 480px */
 @media (max-width: 480px) {
   .form_container {
     max-width: 100%;

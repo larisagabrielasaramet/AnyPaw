@@ -89,13 +89,13 @@
   max-height: 90vh;
   margin-top: 85px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 coloane de dimensiuni egale */
-  grid-template-rows: repeat(4, 1fr); /* 2 linii de dimensiuni egale */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   margin-left: -80px;
   gap: 0px;
 }
 .reviewsContainer::-webkit-scrollbar {
-  display: none; /* ascunde scrollbar-ul */
+  display: none;
 }
 
 .form {

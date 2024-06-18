@@ -17,24 +17,12 @@ const Home = () => {
 
   const openForm = () => {
     window.open("https://zqfp4mlm.forms.app/application-form", "_blank");
-
-    // new window.formsapp("6651ce50967f9a2e38c3bcf3", "popup", {
-    //   overlay: "rgba(45,45,45,0.83)",
-    //   button: { color: "#006666", text: "Join our team" },
-    //   width: "800px",
-    //   height: "600px",
-    //   openingAnimation: {
-    //     entrance: "animate__fadeIn",
-    //     exit: "animate__fadeOut",
-    //   },
-    // });
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
       setCurrentUser(user);
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
   const handleAppointmentClick = () => {

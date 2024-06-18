@@ -25,8 +25,6 @@ const Services = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
     });
-
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
