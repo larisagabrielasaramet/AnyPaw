@@ -4,13 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const AdoptionCard = ({
-  adoption,
-  handleDelete,
-  currentUser,
-  userId,
-  viewAll,
-}) => {
+const AdoptionCard = ({ adoption, handleDelete, currentUser, userId }) => {
   return (
     <div className={styles.adoption_card}>
       <img src={adoption.imageUrl} alt={adoption.title} />
@@ -28,7 +22,7 @@ const AdoptionCard = ({
           <button>More</button>
         </Link>
 
-        {currentUser && adoption.userId === userId && (
+        {currentUser && adoption.userId === userId && adoption.id && (
           <button onClick={() => handleDelete(adoption.id)}>
             <FontAwesomeIcon icon={faTrash} />
           </button>

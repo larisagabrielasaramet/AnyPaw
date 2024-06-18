@@ -30,64 +30,63 @@ const Adoption = () => {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    const fetchAdoptions = async () => {
-      const adoptionsCollection = collection(FIREBASE_DB, "adoption");
-      const adoptionsSnapshot = await getDocs(adoptionsCollection);
-      let adoptionsList = await Promise.all(
-        adoptionsSnapshot.docs.map(async (adoptionDoc) => {
-          const adoption = adoptionDoc.data();
-          let userName = "";
-          if (adoption.userId) {
-            const userSnapshot = await getDoc(
-              doc(FIREBASE_DB, "user", adoption.userId)
-            );
-            const user = userSnapshot.data();
-            userName = user ? user.fullname : "";
-          }
-          return { ...adoption, userName };
-        })
-      );
-      adoptionsList = adoptionsList.sort((a, b) => {
-        if (!b.createdAt || !a.createdAt) {
-          return -1;
-        }
-        return b.createdAt.seconds - a.createdAt.seconds;
-      });
-      setAdoptions(adoptionsList);
-    };
-    const fetchUserAdoptions = async () => {
-      const uid = currentUser ? currentUser.uid : null;
-      if (uid) {
-        const userQuerySnapshot = await getDocs(
-          query(collection(FIREBASE_DB, "user"), where("uid", "==", uid))
-        );
-        if (!userQuerySnapshot.empty) {
-          const userDoc = userQuerySnapshot.docs[0];
-          const userId = userDoc.id;
-          setUserId(userId);
-          console.log(`Verifying userId: ${userId}`);
-          const adoptionQuerySnapshot = await getDocs(
-            query(
-              collection(FIREBASE_DB, "adoption"),
-              where("userId", "==", userId)
-            )
+  const fetchAdoptions = async () => {
+    const adoptionsCollection = collection(FIREBASE_DB, "adoption");
+    const adoptionsSnapshot = await getDocs(adoptionsCollection);
+    let adoptionsList = await Promise.all(
+      adoptionsSnapshot.docs.map(async (adoptionDoc) => {
+        const adoption = adoptionDoc.data();
+        let userName = "";
+        if (adoption.userId) {
+          const userSnapshot = await getDoc(
+            doc(FIREBASE_DB, "user", adoption.userId)
           );
-          const data = adoptionQuerySnapshot.docs.map((doc) => {
-            const adoptionData = doc.data();
-            return {
-              ...adoptionData,
-              id: doc.id,
-            };
-          });
-          setUserAdoptions(data);
+          const user = userSnapshot.data();
+          userName = user ? user.fullname : "";
         }
+        return { ...adoption, userName };
+      })
+    );
+    adoptionsList = adoptionsList.sort((a, b) => {
+      if (!b.createdAt || !a.createdAt) {
+        return -1;
       }
-    };
+      return b.createdAt.seconds - a.createdAt.seconds;
+    });
+    setAdoptions(adoptionsList);
+  };
+  const fetchUserAdoptions = async () => {
+    const uid = currentUser ? currentUser.uid : null;
+    if (uid) {
+      const userQuerySnapshot = await getDocs(
+        query(collection(FIREBASE_DB, "user"), where("uid", "==", uid))
+      );
+      if (!userQuerySnapshot.empty) {
+        const userDoc = userQuerySnapshot.docs[0];
+        const userId = userDoc.id;
+        setUserId(userId);
+        console.log(`Verifying userId: ${userId}`);
+        const adoptionQuerySnapshot = await getDocs(
+          query(
+            collection(FIREBASE_DB, "adoption"),
+            where("userId", "==", userId)
+          )
+        );
+        const data = adoptionQuerySnapshot.docs.map((doc) => {
+          const adoptionData = doc.data();
+          return {
+            ...adoptionData,
+            id: doc.id,
+          };
+        });
+        setUserAdoptions(data);
+      }
+    }
+  };
+  useEffect(() => {
     fetchAdoptions();
     fetchUserAdoptions();
   }, [currentUser]);
-
   const handleDelete = async (id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
@@ -104,6 +103,8 @@ const Adoption = () => {
       setAdoptions(adoptions.filter((adoption) => adoption.id !== id));
       setUserAdoptions(userAdoptions.filter((adoption) => adoption.id !== id));
       Swal.fire("Deleted!", "The adoption has been deleted.", "success");
+      fetchAdoptions();
+      fetchUserAdoptions();
     } else if (result.dismiss === Swal.DismissReason.cancel) {
       Swal.fire("Cancelled", "The adoption is safe :)", "error");
     }

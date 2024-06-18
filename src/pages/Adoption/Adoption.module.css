@@ -84,7 +84,7 @@
 }
 
 .button_group button {
-  width: 100px;
+  width: 120px;
   height: 40px;
   border-radius: 16px;
   border: none;
@@ -95,6 +95,6 @@
 
 .button_group button:hover {
   transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.4s ease-in-out;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px white;
 }
