@@ -38,7 +38,6 @@ const DoctorNavbar = () => {
         <NavLink to="/doctor/profile">My Profile</NavLink>
         <NavLink to="/doctor/appointments">Appointments</NavLink>
         <NavLink to="/doctor/patients">My Patients</NavLink>
-        {/* Add or remove links as needed */}
       </NavMenu>
       <NavBtn>
         <NavBtnLink onClick={handleSignOut}>Sign Out</NavBtnLink>
