@@ -6,7 +6,7 @@
   height: 86vh;
 }
 .schedule {
-  background-image: url("/public/cat.jpg");
+  background-image: url("/public/catInfo.jpg");
   background-repeat: no-repeat;
   background-size: 80%;
   background-position: bottom;
@@ -76,7 +76,7 @@
 }
 
 .contact {
-  background-image: url("/public/image-parrot.jpg");
+  background-image: url("/public/papagalInfo.jpg");
   background-repeat: no-repeat;
   background-size: 70%;
   background-position: bottom;

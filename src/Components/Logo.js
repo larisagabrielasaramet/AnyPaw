@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./logo.png";
+import logo from "./logo.jpg";
 function Logo() {
   return (
     <div style={{ position: "absolute", top: 12, left: 120 }}>
