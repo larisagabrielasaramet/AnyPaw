@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./logoN.jpg";
+import logo from "./logoB.svg";
 function Logo() {
   return (
     <div style={{ position: "absolute", top: 12, left: 120 }}>
@@ -7,7 +7,7 @@ function Logo() {
         src={logo}
         alt="Logo"
         style={{
-          width: "auto",
+          width: "220px",
           height: "60px",
           backgroundColor: "transparent",
         }}
