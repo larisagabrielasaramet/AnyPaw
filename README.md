@@ -1,12 +1,14 @@
 # AnyPaw
 
 Step 1: Download the project
+
 Follow these steps to set up the project:
 
     1. Click the `Code` button on the repository's GitHub page.
     2. Select `Download ZIP` from the dropdown menu.
 
 Step 2: Extract the ZIP File
+
 If you downloaded the ZIP file, you need to extract its contents:
 
     1. Locate the downloaded ZIP file on your computer.
