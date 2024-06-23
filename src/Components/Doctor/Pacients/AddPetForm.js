@@ -12,11 +12,8 @@ function AddPetForm({ onAddPet }) {
   const [entry, setEntry] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
-
   const handleEntryChange = (e) => {
-    const newEntry = [...entry];
-    newEntry.unshift(e.target.value);
-    setEntry(newEntry);
+    setEntry([e.target.value]);
   };
   const handleClose = () => {
     setIsOpen(false);
