@@ -78,17 +78,17 @@
 
 .button_group {
   display: flex;
-  margin-left: 1085px;
-  gap: 10px;
+  margin-left: 1055px;
+  gap: 30px;
   margin-bottom: 5px;
 }
 
 .button_group button {
-  width: 120px;
-  height: 40px;
+  width: 130px;
+  height: 50px;
   border-radius: 16px;
   border: none;
-  font-size: 0.9em;
+  font-size: 1em;
   color: white;
   background-color: #0a5c5c;
 }
